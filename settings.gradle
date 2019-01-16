@@ -1,1 +1,1 @@
-include ':app', ':commonlib', ':home', ':live', ':video', ':message'
+include ':app', ':commonlibrary', ':home', ':live', ':video', ':message'

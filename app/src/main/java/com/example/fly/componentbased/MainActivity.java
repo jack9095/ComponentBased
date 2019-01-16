@@ -11,6 +11,10 @@ import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.base.commonlib.service.HomeExportService;
 
+/**
+ * https://www.jianshu.com/u/ea71bb3770b4  // 路由分析的文章
+ *
+ */
 @Route(path = "/test/main")
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 

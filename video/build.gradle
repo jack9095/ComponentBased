@@ -1,4 +1,4 @@
-if (!isNeedFindModule.toBoolean()) {
+if (!isNeedVideoModule.toBoolean()) {
     apply plugin: 'com.android.application'
 } else {
     apply plugin: 'com.android.library'
@@ -8,8 +8,8 @@ android {
     compileSdkVersion rootProject.ext.android["compileSdkVersion"]
     buildToolsVersion rootProject.ext.android["buildToolsVersion"]
     defaultConfig {
-        if (!isNeedFindModule.toBoolean()) {
-            applicationId "tsou.cn.module_find"
+        if (!isNeedVideoModule.toBoolean()) {
+            applicationId "com.base.video"
         }
         minSdkVersion rootProject.ext.android["minSdkVersion"]
         targetSdkVersion rootProject.ext.android["targetSdkVersion"]
@@ -19,7 +19,7 @@ android {
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         javaCompileOptions {
             annotationProcessorOptions {
-                arguments = [moduleName: project.getName()]
+                arguments = [AROUTER_MODULE_NAME: project.getName()]
             }
         }
 
@@ -43,5 +43,5 @@ dependencies {
     implementation rootProject.ext.dependencies["arouter-api"]
     annotationProcessor rootProject.ext.dependencies["arouter-compiler"]
     implementation rootProject.ext.dependencies["autolayout"]
-    implementation project(':commonlib')
+    implementation project(':commonlibrary')
 }

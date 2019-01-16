@@ -12,7 +12,7 @@ android {
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         javaCompileOptions {
             annotationProcessorOptions {
-                arguments = [moduleName: project.getName()]
+                arguments = [AROUTER_MODULE_NAME: project.getName()]
             }
         }
     }
@@ -43,14 +43,14 @@ dependencies {
     if (isNeedHomeModule.toBoolean()) {
         implementation project(':home')
     }
-    if (isNeedFindModule.toBoolean()) {
+    if (isNeedVideoModule.toBoolean()) {
         implementation project(':video')
     }
-    if (isNeedChatModule.toBoolean()) {
+    if (isNeedMessageModule.toBoolean()) {
         implementation project(':message')
     }
-    if (isNeedMineModule.toBoolean()) {
+    if (isNeedLiveModule.toBoolean()) {
         implementation project(':live')
     }
-    implementation project(':commonlib')
+    implementation project(':commonlibrary')
 }

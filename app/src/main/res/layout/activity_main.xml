@@ -3,31 +3,31 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.base.dtaroutor.MainActivity">
+    tools:context="com.example.fly.componentbased.MainActivity">
 
     <TextView
         android:id="@+id/chat_tv"
         style="@style/text_style"
         android:layout_marginTop="100px"
-        android:text="聊天" />
+        android:text="消息" />
 
     <TextView
         android:id="@+id/contract_tv"
         style="@style/text_style"
         android:layout_marginTop="350px"
-        android:text="通讯录" />
+        android:text="首页" />
 
     <TextView
         android:id="@+id/find_tv"
         style="@style/text_style"
         android:layout_marginTop="600px"
-        android:text="发现" />
+        android:text="直播" />
 
     <TextView
         android:id="@+id/mine_tv"
         style="@style/text_style"
         android:layout_marginTop="850px"
-        android:text="我的" />
+        android:text="视频" />
 
     <TextView
         android:id="@+id/say_hello_tv"

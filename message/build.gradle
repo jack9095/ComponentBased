@@ -1,4 +1,4 @@
-if (!isNeedChatModule.toBoolean()) {
+if (!isNeedMessageModule.toBoolean()) {
     apply plugin: 'com.android.application'
 } else {
     apply plugin: 'com.android.library'
@@ -8,8 +8,8 @@ android {
     compileSdkVersion rootProject.ext.android["compileSdkVersion"]
     buildToolsVersion rootProject.ext.android["buildToolsVersion"]
     defaultConfig {
-        if (!isNeedChatModule.toBoolean()) {
-            applicationId "tsou.cn.module_chat"
+        if (!isNeedMessageModule.toBoolean()) {
+            applicationId "com.base.message"
         }
         minSdkVersion rootProject.ext.android["minSdkVersion"]
         targetSdkVersion rootProject.ext.android["targetSdkVersion"]
@@ -18,7 +18,7 @@ android {
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         javaCompileOptions {
             annotationProcessorOptions {
-                arguments = [moduleName: project.getName()]
+                arguments = [AROUTER_MODULE_NAME: project.getName()]
             }
         }
 
@@ -43,5 +43,5 @@ dependencies {
     implementation rootProject.ext.dependencies["constraint-layout"]
     implementation rootProject.ext.dependencies["arouter-api"]
     annotationProcessor rootProject.ext.dependencies["arouter-compiler"]
-    implementation project(':commonlib')
+    implementation project(':commonlibrary')
 }
