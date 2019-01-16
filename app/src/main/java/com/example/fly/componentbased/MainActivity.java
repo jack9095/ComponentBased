@@ -14,6 +14,8 @@ import com.base.commonlib.service.HomeExportService;
 /**
  * https://www.jianshu.com/u/ea71bb3770b4  // 路由分析的文章
  *
+ * https://www.cnblogs.com/permanent2012moira/p/5126276.html  混淆配置
+ *
  */
 @Route(path = "/test/main")
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
@@ -53,7 +55,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.chat_tv:
-                ARouter.getInstance().build("/chat/main")
+                ARouter.getInstance().build("/message/main")
                         .withLong("key1", 666L)
                         .withString("key3", "888")
                         .navigation();
@@ -63,15 +65,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         .navigation();
                 break;
             case R.id.find_tv:
-                ARouter.getInstance().build("/find/main")
+                ARouter.getInstance().build("/video/main")
                         .navigation();
                 break;
             case R.id.mine_tv:
-                ARouter.getInstance().build("/mine/main")
+                ARouter.getInstance().build("/live/main")
                         .navigation();
                 break;
             case R.id.say_hello_tv:
-                Toast.makeText(this, baseService.sayHello("易诚互动"), Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, baseService.sayHello("组件化测试使用"), Toast.LENGTH_SHORT).show();
                 break;
             default:
                 break;

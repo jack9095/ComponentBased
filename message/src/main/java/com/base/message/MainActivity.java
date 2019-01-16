@@ -10,7 +10,7 @@ import com.alibaba.android.arouter.facade.annotation.Autowired;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
 
-@Route(path = "/chat/main")
+@Route(path = "/message/main")
 public class MainActivity extends AppCompatActivity {
 
     private TextView text;

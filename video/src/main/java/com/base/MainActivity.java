@@ -4,10 +4,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
-import com.base.find.R;
+import com.base.video.R;
 
-@Route(path = "/find/main")
-public class FindActivity extends AppCompatActivity {
+@Route(path = "/video/main")
+public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
