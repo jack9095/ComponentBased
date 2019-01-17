@@ -10,14 +10,6 @@ import com.base.commonlib.di.module.ClientModule;
 import java.util.LinkedList;
 
 
-/**
- * 本项目由
- * mvp
- * +dagger2
- * +retrofit
- * +rxjava
- * +butterknife组成
- */
 public abstract class BaseApplication extends Application {
     static private BaseApplication mApplication;
     public LinkedList<BaseCommonActivity> mActivityList;

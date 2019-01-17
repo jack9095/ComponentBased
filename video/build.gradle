@@ -49,6 +49,5 @@ dependencies {
     implementation rootProject.ext.dependencies["appcompat-v7"]
     implementation rootProject.ext.dependencies["arouter-api"]
     annotationProcessor rootProject.ext.dependencies["arouter-compiler"]
-    implementation rootProject.ext.dependencies["autolayout"]
     implementation project(':commonlibrary')
 }

@@ -133,14 +133,11 @@ dependencies {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
 
-//    compile(name:'takt', ext:'aar')
-
     testCompile rootProject.ext.dependencies["junit"]
     implementation rootProject.ext.dependencies["appcompat-v7"]
     implementation rootProject.ext.dependencies["constraint-layout"]
     implementation rootProject.ext.dependencies["arouter-api"]
     implementation rootProject.ext.dependencies["recyclerview-v7"]
-    implementation rootProject.ext.dependencies["autolayout"]
     implementation rootProject.ext.dependencies["butterknife"]
     implementation rootProject.ext.dependencies["annotations"]
     annotationProcessor rootProject.ext.dependencies["arouter-compiler"]

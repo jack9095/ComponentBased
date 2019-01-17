@@ -6,11 +6,9 @@ ext {
                targetSdkVersion        : 28,
                versionCode             : 100000,
                versionName             : "1.0.0",
-               androidSupportSdkVersion: "26.0.2",
-               retrofitSdkVersion      : "2.0.0",
-               dagger2SdkVersion       : "2.6",
-               rxlifecycleSdkVersion   : "0.6.1",
-               espressoSdkVersion      : "2.2.2"
+               androidSupportSdkVersion: "28.0.0",
+               retrofitSdkVersion      : "2.4.0",
+               dagger2SdkVersion       : "2.9",
     ]
     dependencies = [
             "javax.annotation"       : 'javax.annotation:jsr250-api:1.0',
@@ -20,58 +18,105 @@ ext {
             "cardview-v7"            : "com.android.support:cardview-v7:${android["androidSupportSdkVersion"]}",
             "annotations"            : "com.android.support:support-annotations:${android["androidSupportSdkVersion"]}",
             "recyclerview-v7"        : "com.android.support:recyclerview-v7:${android["androidSupportSdkVersion"]}",
+            "constraint-layout"      : 'com.android.support.constraint:constraint-layout:1.1.3',//约束性布局
+
+            "multidex"               : 'com.android.support:multidex:1.0.2',//解决兼容性问题 分包
+
+            // 感知生命周期
+            "lifecycle"              : "android.arch.lifecycle:extensions:1.1.1",
+            "lifecycle-compiler"     : "android.arch.lifecycle:compiler:1.1.1",
+
             //网络框架
-            "retrofit"               : "com.squareup.retrofit2:retrofit:2.0.0",
-            "retrofit-converter-gson": "com.squareup.retrofit2:converter-gson:2.0.0",
-            "retrofit-adapter-rxjava": "com.squareup.retrofit2:adapter-rxjava:2.0.0",
+            "retrofit"               : "com.squareup.retrofit2:retrofit:${android["retrofitSdkVersion"]}",
+            "retrofit-converter-gson": "com.squareup.retrofit2:converter-gson:${android["retrofitSdkVersion"]}",
+            "retrofit-adapter-rxjava": "com.squareup.retrofit2:adapter-rxjava:${android["retrofitSdkVersion"]}",
             "converter-scalars"      : "com.squareup.retrofit2:converter-scalars:2.0.0",
-            "okhttp3"                : "com.squareup.okhttp3:okhttp:3.2.0",
-            "gson"                   : "com.google.code.gson:gson:2.6.2",
+            "okhttp3"                : "com.squareup.okhttp3:okhttp:3.12.1",
+            "logging"                : "com.squareup.okhttp3:logging-interceptor:3.10.0",
+
+            // json解析框架
+            "gson"                   : "com.google.code.gson:gson:2.8.5",
 
             //dagger2
             "dagger2"                : "com.google.dagger:dagger:${android["dagger2SdkVersion"]}",
             "dagger2-apt-compiler"   : "com.google.dagger:dagger-compiler:${android["dagger2SdkVersion"]}",
-            "rxandroid"              : "io.reactivex:rxandroid:1.1.0",
-            "rxjava"                 : "io.reactivex:rxjava:1.1.0",
-            "autolayout"             : "com.zhy:autolayout:1.4.5",
-            "butterknife"            : "com.jakewharton:butterknife:8.4.0",
-            "butterknife-apt"        : "com.jakewharton:butterknife-compiler:8.4.0",
 
+            // rx系列
+            "rxandroid"              : "io.reactivex:rxandroid:1.2.1",
+            "rxjava"                 : "io.reactivex:rxjava:1.3.0",
+
+            // UI注解框架
+            "butterknife"            : "com.jakewharton:butterknife:8.8.1",
+            "butterknife-apt"        : "com.jakewharton:butterknife-compiler:8.8.1",
+
+            // 权限
             "rxpermissions"          : "com.tbruyelle.rxpermissions:rxpermissions:0.7.0@aar",
+
             //图片处理框架
             "glide"                  : "com.github.bumptech.glide:glide:3.7.0",
+
+            // 阿里路由
+            "arouter-api"            : 'com.alibaba:arouter-api:1.4.1',//ARouter api
+            "arouter-compiler"       : 'com.alibaba:arouter-compiler:1.2.2',//ARouter
+
+            // 检测内存泄漏
+            "canary-debug"           : "com.squareup.leakcanary:leakcanary-android:1.5",
+            "canary-release"         : "com.squareup.leakcanary:leakcanary-android-no-op:1.5",
 
             //test
             "junit"                  : "junit:junit:4.12",
             "androidJUnitRunner"     : "android.support.test.runner.AndroidJUnitRunner",
-            "timber"                 : "com.jakewharton.timber:timber:4.1.2",
-            "canary-debug"           : "com.squareup.leakcanary:leakcanary-android:1.5",
-            "canary-release"         : "com.squareup.leakcanary:leakcanary-android-no-op:1.5",
+            "test:runner"            : 'com.android.support.test:runner:1.0.2',//测试依赖，新建项目时会默认添加，一般不建议添加
+            "espresso-core"          : 'com.android.support.test.espresso:espresso-core:3.0.2',//测试依赖，新建项目时会默认添加，一般不建议添加
+
+            // eventbus
+            "eventbus"               : "org.greenrobot:eventbus:3.1.1",
+
+            // 滚轮日历及省市区三级联动
+            "PickerView"             : 'com.contrarywind:Android-PickerView:4.1.6',
+
+            // 任意view上面的小红点
+            "badgeview"              : 'q.rorbin:badgeview:1.1.3',
+
+            // 圆形或圆角图片
+            "roundedimageview"       : 'com.makeramen:roundedimageview:2.3.0',
+
+            //tablayout库
+            "FlycoTabLayout_Lib"     : 'com.flyco.tablayout:FlycoTabLayout_Lib:2.1.2@aar',
+
+            // 下拉刷新，上拉加载库
+            "pullrefreshlayout"      : 'com.yan:pullrefreshlayout:2.2.6',
+
+            //类似旋转木马的效果图
+            "carrousellayout"        : 'com.dalong:carrousellayout:1.0.0',
+            //类似旋转木马的效果图的RecyclerView
+            "recyclercoverflow"      : 'com.chenlittleping:recyclercoverflow:1.0.5',
+
+            // 开源增强版的WebView https://blog.csdn.net/qianxin2222/article/details/52288420
             "Android-AdvancedWebView": "com.github.delight-im:Android-AdvancedWebView:v3.0.0",
+
+            // 极光推送
             "jpush"                  : "cn.jiguang.sdk:jpush:3.0.9",
             "jpushcore"              : "cn.jiguang.sdk:jcore:1.1.7",
-            "scale-image-view"       : "com.davemorrissey.labs:subsampling-scale-image-view:3.6.0",//加载大图，可缩放的ImageView
-            "banner"                 : "com.youth.banner:banner:1.4.10",
-            "MagicIndicator"         : "com.github.hackware1993:MagicIndicator:1.5.0",//一个tab导航栏
-            "logging"                : "com.squareup.okhttp3:logging-interceptor:3.1.2",
-            "PersistentCookieJar"    : 'com.github.franmontiel:PersistentCookieJar:v1.0.1',//用于持久化cookie工具
-            "carrousellayout"        : 'com.dalong:carrousellayout:1.0.0',//类似旋转木马的效果图
-            "recyclercoverflow"      : 'com.chenlittleping:recyclercoverflow:1.0.5',//类似旋转木马的效果图的RV
+
+            //加载大图，可缩放的ImageView
+            "scale-image-view"       : "com.davemorrissey.labs:subsampling-scale-image-view:3.6.0",
+
+            //用于持久化cookie工具
+            "PersistentCookieJar"    : 'com.github.franmontiel:PersistentCookieJar:v1.0.1',
+
+            // ViewPager开源封装  https://blog.csdn.net/qq_36598186/article/details/80988337  git地址：https://github.com/florent37/MaterialViewPager
             "materialtabstrip"       : 'com.jpardogo.materialtabstrip:library:1.1.0',
             "kenburnsview"           : 'com.flaviofaria:kenburnsview:1.0.7',
             "materialviewpager"      : 'com.github.florent37:materialviewpager:1.2.3',
-            "avi"                    : 'com.wang.avi:library:2.1.3',//一个酷炫的加载动画
-            "vcharts"                : 'com.vinctor:vcharts:1.0.0',//一个环形统计图
-            "material-calendarview"  : 'com.prolificinteractive:material-calendarview:1.4.3',//一个material design风格的日历控件
-            "commonrefreshlayout"    : 'com.mylhyl:commonrefreshlayout:2.4',//一个支持上拉加载更多的RecyclerView
-            "openDefaultRelease"     : 'com.sina.weibo.sdk:core:2.0.3:openDefaultRelease@aar',//微博分享
-            "umengcommon"            : 'com.umeng.sdk:common:latest.integration',//友盟统计sdk
-            "umenganalytics"         : 'com.umeng.sdk:analytics:latest.integration',//友盟统计sdk
-            "multidex"               : 'com.android.support:multidex:1.0.1',//解决兼容性问题
-            "arouter-api"            : 'com.alibaba:arouter-api:1.4.1',//ARouter api
-            "arouter-compiler"       : 'com.alibaba:arouter-compiler:1.2.2',//ARouter
-            "constraint-layout"      : 'com.android.support.constraint:constraint-layout:1.1.0',//约束性布局
-            "test:runner"            : 'com.android.support.test:runner:1.0.2',//测试依赖，新建项目时会默认添加，一般不建议添加
-            "espresso-core"          : 'com.android.support.test.espresso:espresso-core:3.0.2',//测试依赖，新建项目时会默认添加，一般不建议添加
+
+            // 加载动画
+            "avi"                    : 'com.wang.avi:library:2.1.3',
+
+            // 环形统计图
+            "vcharts"                : 'com.vinctor:vcharts:1.0.0',
+
+            // material design风格的日历控件
+            "material-calendarview"  : 'com.prolificinteractive:material-calendarview:1.4.3',
     ]
 }
