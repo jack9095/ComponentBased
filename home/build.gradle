@@ -34,6 +34,13 @@ android {
 
 }
 
+// 添加aar必备
+repositories {
+    flatDir {
+        dirs 'libs','../commonlibrary/libs'
+    }
+}
+
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {

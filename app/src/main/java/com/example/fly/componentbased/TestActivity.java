@@ -9,7 +9,7 @@ import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
 
 @Route(path = "/test/target")
-public class TargetActivity extends AppCompatActivity {
+public class TestActivity extends AppCompatActivity {
 
     @Autowired
     public String key3;

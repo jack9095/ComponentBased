@@ -27,6 +27,13 @@ android {
 
 }
 
+// 添加aar必备
+repositories {
+    flatDir {
+        dirs 'libs'
+    }
+}
+
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
@@ -58,4 +65,6 @@ dependencies {
     implementation rootProject.ext.dependencies["recyclerview-v7"]
     provided rootProject.ext.dependencies["javax.annotation"]
     annotationProcessor rootProject.ext.dependencies["dagger2-apt-compiler"]
+
+    implementation(name:'bottomnavigationbar-release', ext:'aar')
 }
