@@ -1,6 +1,7 @@
 package com.example.fly.componentbased;
 
-import android.app.ActivityManager;
+import android.app.Activity;
+import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -10,7 +11,10 @@ import android.widget.Toast;
 import com.alibaba.android.arouter.facade.annotation.Autowired;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
+import com.base.commonlib.di.module.ClientModule_ProvideRetrofitFactory;
 import com.base.commonlib.service.HomeExportService;
+
+import retrofit2.Retrofit;
 
 /**
  * https://www.jianshu.com/u/ea71bb3770b4  // 路由分析的文章
@@ -79,6 +83,22 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             default:
                 break;
         }
+    }
+
+    /**
+     * Home键切换到后台，调用此方法，但是比如打电话进来切换到后台是不会调用这个方法的
+     */
+    @Override
+    protected void onUserLeaveHint() {
+        super.onUserLeaveHint();
+    }
+
+    // activity 关联到 Context
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(newBase);
+
+
     }
 }
 
