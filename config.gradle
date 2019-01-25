@@ -30,7 +30,7 @@ ext {
             "retrofit"               : "com.squareup.retrofit2:retrofit:${android["retrofitSdkVersion"]}",
             "retrofit-converter-gson": "com.squareup.retrofit2:converter-gson:${android["retrofitSdkVersion"]}",
             "retrofit-adapter-rxjava": "com.squareup.retrofit2:adapter-rxjava:${android["retrofitSdkVersion"]}",
-            "converter-scalars"      : "com.squareup.retrofit2:converter-scalars:2.0.0",
+            "converter-scalars"      : "com.squareup.retrofit2:converter-scalars:2.0.1",
             "okhttp3"                : "com.squareup.okhttp3:okhttp:3.12.1",
             "logging"                : "com.squareup.okhttp3:logging-interceptor:3.10.0",
 

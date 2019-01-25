@@ -56,16 +56,16 @@ public final class Retrofit {
     }
 
     /**
-     * @param service
-     * @param <T>
-     * @return
+     * @param service 构建API的生产接口
+     * @return 返回 构建API的生产接口
      */
     @SuppressWarnings("unchecked") // Single-interface proxy creation guarded by parameter safety.
     public <T> T create(final Class<T> service) {
-        Utils.validateServiceInterface(service);
+        Utils.validateServiceInterface(service); // 验证该接口的合法性
         if (validateEagerly) {
-            eagerlyValidateMethods(service);
+            eagerlyValidateMethods(service); // 立即（验证)）解析接口中的方法
         }
+        // 通过动态代理将构建API的生产接口的注解翻译成一个个http请求，再由线程池来执行这一个个的网络请求
         return (T) Proxy.newProxyInstance(service.getClassLoader(), new Class<?>[]{service},
                 new InvocationHandler() {
                     private final Platform platform = Platform.get();
@@ -75,28 +75,38 @@ public final class Retrofit {
                             throws Throwable {
                         // If the method is a method from Object then defer to normal invocation.
                         if (method.getDeclaringClass() == Object.class) {
-                            return method.invoke(this, args);
+                            return method.invoke(this, args); // 如果该方法来自对象，由该实例正常调用
                         }
-                        if (platform.isDefaultMethod(method)) {
+                        if (platform.isDefaultMethod(method)) { //如果该方法是声明为default，则正常调用该方法
                             return platform.invokeDefaultMethod(method, service, proxy, args);
                         }
+                        // 从缓存ServiceMethod的方法的集合中根据Method获取该ServiceMethod实例对象
                         ServiceMethod<Object, Object> serviceMethod =
                                 (ServiceMethod<Object, Object>) loadServiceMethod(method);
-                        OkHttpCall<Object> okHttpCall = new OkHttpCall<>(serviceMethod, args);
+                        OkHttpCall<Object> okHttpCall = new OkHttpCall<>(serviceMethod, args); // 创建一个请求执行对象，就是okHttp中的Call
                         return serviceMethod.adapt(okHttpCall);
                     }
                 });
     }
 
+    /**
+     * 会在Retrofit第一次cretae的时候调用
+     *
+     * 立即（验证)）解析接口中的方法
+     * @param service  构建API的生产接口
+     */
     private void eagerlyValidateMethods(Class<?> service) {
         Platform platform = Platform.get();
-        for (Method method : service.getDeclaredMethods()) {
-            if (!platform.isDefaultMethod(method)) {
+        for (Method method : service.getDeclaredMethods()) { // 利用反射获取生产接口中的所有方法（私有，默认、公有)）
+            if (!platform.isDefaultMethod(method)) { //判断是不是default方法，jdk7以后接口中可以编写方法的实现，但是必须在方法前面设置一个关键字default
                 loadServiceMethod(method);
             }
         }
     }
 
+    /**
+     * 加载接口中的非default方法，构建一个ServiceMethod对象，以Method为Key，该对象作为value添加到serviceMethodCache集合缓存起来
+     */
     ServiceMethod<?, ?> loadServiceMethod(Method method) {
         ServiceMethod<?, ?> result = serviceMethodCache.get(method);
         if (result != null) return result;
@@ -104,6 +114,7 @@ public final class Retrofit {
         synchronized (serviceMethodCache) {
             result = serviceMethodCache.get(method);
             if (result == null) {
+                // 传入Retrofit实例和Method到MethodBuild对象构建一个ServiceMethod，该对象将会包含Retrofit所有数据，以后就是用做对象完成数据请求以及封装
                 result = new ServiceMethod.Builder<>(this, method).build();
                 serviceMethodCache.put(method, result);
             }
@@ -300,7 +311,7 @@ public final class Retrofit {
      * 内部类 Builder
      */
     public static final class Builder {
-        private final Platform platform;  // 平台 ios  android  java8，默认用的都是android平台
+        private final Platform platform;  // 平台  android  java8，默认用的都是android平台
         private @Nullable
         okhttp3.Call.Factory callFactory;  // 请求网络的工厂，默认是okHttp的
         private HttpUrl baseUrl; // 网络请求的基地址，传进来的是String，这里要把String转换成HttpUrl
