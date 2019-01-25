@@ -84,7 +84,7 @@ public final class Retrofit {
                         ServiceMethod<Object, Object> serviceMethod =
                                 (ServiceMethod<Object, Object>) loadServiceMethod(method);
                         OkHttpCall<Object> okHttpCall = new OkHttpCall<>(serviceMethod, args); // 创建一个请求执行对象，就是okHttp中的Call
-                        return serviceMethod.adapt(okHttpCall);
+                        return serviceMethod.adapt(okHttpCall);  // 网络请求适配器的使用以及异步执行器的回调
                     }
                 });
     }

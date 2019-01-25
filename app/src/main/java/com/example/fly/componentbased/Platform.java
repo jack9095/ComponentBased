@@ -48,11 +48,13 @@ class Platform {
         return false;
     }
 
-    @Nullable Object invokeDefaultMethod(Method method, Class<?> declaringClass, Object object,
-                                         @Nullable Object... args) throws Throwable {
+    @Nullable Object invokeDefaultMethod(Method method, Class<?> declaringClass, Object object, @Nullable Object... args) throws Throwable {
         throw new UnsupportedOperationException();
     }
 
+    /**
+     *  Java 8 平台
+     */
     @IgnoreJRERequirement // Only classloaded and used on Java 8.
     static class Java8 extends Platform {
         @Override boolean isDefaultMethod(Method method) {
@@ -72,6 +74,9 @@ class Platform {
         }
     }
 
+    /**
+     * Android 平台
+     */
     static class Android extends Platform {
         @Override public Executor defaultCallbackExecutor() {
             // 持有有个主线程的Handler，发送响应是事件到主线程
@@ -85,7 +90,7 @@ class Platform {
         }
 
         static class MainThreadExecutor implements Executor {
-            private final Handler handler = new Handler(Looper.getMainLooper());
+            private final Handler handler = new Handler(Looper.getMainLooper()); // 创建主线程的handler
 
             @Override public void execute(Runnable r) {
                 handler.post(r);
