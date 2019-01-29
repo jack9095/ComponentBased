@@ -1,19 +1,3 @@
-/*
- *  Licensed to the Apache Software Foundation (ASF) under one or more
- *  contributor license agreements.  See the NOTICE file distributed with
- *  this work for additional information regarding copyright ownership.
- *  The ASF licenses this file to You under the Apache License, Version 2.0
- *  (the "License"); you may not use this file except in compliance with
- *  the License.  You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
- *  Unless required by applicable law or agreed to in writing, software
- *  distributed under the License is distributed on an "AS IS" BASIS,
- *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- *  See the License for the specific language governing permissions and
- *  limitations under the License.
- */
 package com.example.fly.componentbased.okhttp.interceptor;
 
 import java.io.IOException;
@@ -21,6 +5,7 @@ import java.util.List;
 import okhttp3.Cookie;
 import okhttp3.CookieJar;
 import okhttp3.Headers;
+import okhttp3.HttpUrl;
 import okhttp3.Interceptor;
 import okhttp3.MediaType;
 import okhttp3.Request;
@@ -54,6 +39,7 @@ public final class BridgeInterceptor implements Interceptor {
 
         RequestBody body = userRequest.body();
         if (body != null) {
+            // 进行Header的包装
             MediaType contentType = body.contentType();
             if (contentType != null) {
                 requestBuilder.header("Content-Type", contentType.toString());
@@ -79,12 +65,14 @@ public final class BridgeInterceptor implements Interceptor {
 
         // If we add an "Accept-Encoding: gzip" header field we're responsible for also decompressing
         // the transfer stream.
+        // 如果我们添加一个“Accept-Encoding：gzip”头字段，我们也负责解压缩传输流。
         boolean transparentGzip = false;
         if (userRequest.header("Accept-Encoding") == null && userRequest.header("Range") == null) {
             transparentGzip = true;
             requestBuilder.header("Accept-Encoding", "gzip");
         }
 
+        // 创建OkhttpClient配置的cookieJar
         List<Cookie> cookies = cookieJar.loadForRequest(userRequest.url());
         if (!cookies.isEmpty()) {
             requestBuilder.header("Cookie", cookieHeader(cookies));
@@ -97,7 +85,7 @@ public final class BridgeInterceptor implements Interceptor {
         // 执行拦截器链的操作，相当于发起一个网络请求
         Response networkResponse = chain.proceed(requestBuilder.build());
 
-        // 将服务端返回的Response转化成客户端可以使用的Response
+        // 解析服务器返回的Header，如果没有这个cookie，则不进行解析
         HttpHeaders.receiveHeaders(cookieJar, userRequest.url(), networkResponse.headers());
 
         Response.Builder responseBuilder = networkResponse.newBuilder()
@@ -115,6 +103,7 @@ public final class BridgeInterceptor implements Interceptor {
                     .build();
             responseBuilder.headers(strippedHeaders);
             String contentType = networkResponse.header("Content-Type");
+            // 这里可以看到压缩解压的操作是由Okio库来处理的
             responseBuilder.body(new RealResponseBody(contentType, -1L, Okio.buffer(responseBody)));
         }
 

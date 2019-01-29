@@ -44,7 +44,10 @@ import static java.util.concurrent.TimeUnit.MILLISECONDS;
 import static okhttp3.internal.Util.closeQuietly;
 import static okhttp3.internal.Util.discard;
 
-/** Serves requests from the cache and writes responses to the cache. */
+/** Serves requests from the cache and writes responses to the cache.
+ *
+ *  服务来自缓存的请求并将响应写入缓存
+ */
 public final class CacheInterceptor implements Interceptor {
     final InternalCache cache;
 
@@ -53,6 +56,7 @@ public final class CacheInterceptor implements Interceptor {
     }
 
     @Override public Response intercept(Chain chain) throws IOException {
+        // 读取候选缓存
         Response cacheCandidate = cache != null
                 ? cache.get(chain.request())
                 : null;
@@ -100,12 +104,14 @@ public final class CacheInterceptor implements Interceptor {
             networkResponse = chain.proceed(networkRequest);
         } finally {
             // If we're crashing on I/O or otherwise, don't leak the cache body.
+            // 关闭资源
             if (networkResponse == null && cacheCandidate != null) {
                 closeQuietly(cacheCandidate.body());
             }
         }
 
         // If we have a cache response too, then we're doing a conditional get.
+        // 接收到网络结果，如果响应code式304，则使用缓存，返回缓存结果
         if (cacheResponse != null) {
             if (networkResponse.code() == HTTP_NOT_MODIFIED) { // 返回的code为304时，表示得从缓存中获取
                         .headers(combine(cacheResponse.headers(), networkResponse.headers()))
@@ -126,6 +132,7 @@ public final class CacheInterceptor implements Interceptor {
             }
         }
 
+        // 读取网络结果
         Response response = networkResponse.newBuilder()
                 .cacheResponse(stripBody(cacheResponse))
                 .networkResponse(stripBody(networkResponse))

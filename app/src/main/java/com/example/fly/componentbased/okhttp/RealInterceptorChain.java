@@ -1,5 +1,7 @@
 package com.example.fly.componentbased.okhttp;
 
+import com.example.fly.componentbased.okhttp.connect.StreamAllocation;
+
 import java.io.IOException;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -11,8 +13,6 @@ import okhttp3.Request;
 import okhttp3.Response;
 import okhttp3.internal.connection.RealConnection;
 import okhttp3.internal.http.HttpCodec;
-
-import com.kuanquan.testdemo.okhttp.connect.StreamAllocation;
 
 import static okhttp3.internal.Util.checkDuration;
 

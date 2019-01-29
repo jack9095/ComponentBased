@@ -146,8 +146,8 @@ import okio.Source;
  * caching directives. It even offers convenient constants {@link CacheControl#FORCE_NETWORK} and
  * {@link CacheControl#FORCE_CACHE} that address the use cases above.
  *
- * 缓存请求数据和相应数据
- * 通过CacheRequestImpl  通过这个接口来实现缓存拦截器的缓存的写入都去操作
+ * 缓存请求数据和响应数据
+ * 通过CacheRequestImpl  通过这个接口来实现缓存拦截器的缓存的写入读取操作
  */
 public final class Cache implements Closeable, Flushable {
     private static final int VERSION = 201105;

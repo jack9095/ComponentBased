@@ -8,6 +8,8 @@ import com.alibaba.android.arouter.facade.annotation.Autowired;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
 
+import okhttp3.OkHttpClient;
+
 @Route(path = "/test/target")
 public class TestActivity extends AppCompatActivity {
 
@@ -20,5 +22,7 @@ public class TestActivity extends AppCompatActivity {
         setContentView(R.layout.activity_target);
         ARouter.getInstance().inject(this);
         Toast.makeText(this, key3, Toast.LENGTH_LONG).show();
+
+
     }
 }
