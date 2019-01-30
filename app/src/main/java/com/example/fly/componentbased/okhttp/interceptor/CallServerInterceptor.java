@@ -37,7 +37,7 @@ public final class CallServerInterceptor implements Interceptor {
         Request request = realChain.request();
 
         long sentRequestMillis = System.currentTimeMillis();
-
+        // 写入请求头
         realChain.eventListener().requestHeadersStart(realChain.call());
         httpCodec.writeRequestHeaders(request); // 向socket当中写入请求的头部的信息
         realChain.eventListener().requestHeadersEnd(realChain.call(), request);
@@ -47,12 +47,15 @@ public final class CallServerInterceptor implements Interceptor {
             // If there's a "Expect: 100-continue" header on the request, wait for a "HTTP/1.1 100
             // Continue" response before transmitting the request body. If we don't get that, return
             // what we did get (such as a 4xx response) without ever transmitting the request body.
+            // 如果请求中存在“Expect：100-continue”标头，请在发送请求主体之前等待“HTTP / 1.1 100 Continue”响应。
+            // 如果我们没有得到，请返回我们得到的内容（例如4xx响应），而不发送请求主体。
             if ("100-continue".equalsIgnoreCase(request.header("Expect"))) {
                 httpCodec.flushRequest();
                 realChain.eventListener().responseHeadersStart(realChain.call());
                 responseBuilder = httpCodec.readResponseHeaders(true);
             }
 
+            // 写入请求体
             if (responseBuilder == null) {
                 // Write the request body if the "Expect: 100-continue" expectation was met.
                 realChain.eventListener().requestBodyStart(realChain.call());
@@ -87,6 +90,7 @@ public final class CallServerInterceptor implements Interceptor {
                 .receivedResponseAtMillis(System.currentTimeMillis())
                 .build();
 
+        // 读取响应体
         int code = response.code();
         if (code == 100) {
             // server sent a 100-continue even though we did not request one.
