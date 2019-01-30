@@ -1,5 +1,7 @@
 package com.example.fly.componentbased.okhttp.interceptor;
 
+import android.support.annotation.NonNull;
+
 import java.io.IOException;
 import java.net.ProtocolException;
 import okhttp3.Interceptor;
@@ -27,7 +29,7 @@ public final class CallServerInterceptor implements Interceptor {
         this.forWebSocket = forWebSocket;
     }
 
-    @Override public Response intercept(Chain chain) throws IOException {
+    @Override public Response intercept(@NonNull Chain chain) throws IOException {
         RealInterceptorChain realChain = (RealInterceptorChain) chain; // 所有网络连接器的链
         HttpCodec httpCodec = realChain.httpStream();
         StreamAllocation streamAllocation = realChain.streamAllocation();

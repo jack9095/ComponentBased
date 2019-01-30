@@ -30,20 +30,24 @@ import static okhttp3.internal.Util.closeQuietly;
  * of which connections to keep open for future use.
  * 在有限的时间内复用链接
  * 连接池中的连接是如何回收的
+ * 连接池，用来管理和复用连接
  */
 public final class ConnectionPool {
     /**
-     * Background threads are used to cleanup expired connections. There will be at most a single
-     * thread running per connection pool. The thread pool executor permits the pool itself to be
-     * garbage collected.
+     * 后台线程用于清除过期的连接
+     *
+     * 每个连接池最多只能运行一个线程
+     *
+     * 线程池执行器允许对池本身进行垃圾收集
      */
     private static final Executor executor = new ThreadPoolExecutor(0 /* corePoolSize */,
             Integer.MAX_VALUE /* maximumPoolSize */, 60L /* keepAliveTime */, TimeUnit.SECONDS,
             new SynchronousQueue<Runnable>(), Util.threadFactory("OkHttp ConnectionPool", true));
 
-    /** The maximum number of idle connections for each address. */
-    private final int maxIdleConnections;
-    private final long keepAliveDurationNs;
+    /** 每个地址的最大空闲连接数. */
+    private final int maxIdleConnections; // 默认 5
+    // 每个keep-alive时长为5分钟
+    private final long keepAliveDurationNs; // 默认5分钟
     private final Runnable cleanupRunnable = new Runnable() {
         @Override public void run() {
             while (true) {
@@ -63,6 +67,7 @@ public final class ConnectionPool {
         }
     };
 
+    // 连接池中维护了一个双端队列Deque来存储连接
     private final Deque<RealConnection> connections = new ArrayDeque<>();
     final RouteDatabase routeDatabase = new RouteDatabase();
     boolean cleanupRunning;
@@ -71,6 +76,7 @@ public final class ConnectionPool {
      * Create a new connection pool with tuning parameters appropriate for a single-user application.
      * The tuning parameters in this pool are subject to change in future OkHttp releases. Currently
      * this pool holds up to 5 idle connections which will be evicted after 5 minutes of inactivity.
+     * TODO 连接池最多保持5个地址的连接keep-alive，每个keep-alive时长为5分钟
      */
     public ConnectionPool() {
         this(5, 5, TimeUnit.MINUTES);
@@ -81,12 +87,14 @@ public final class ConnectionPool {
         this.keepAliveDurationNs = timeUnit.toNanos(keepAliveDuration);
 
         // Put a floor on the keep alive duration, otherwise cleanup will spin loop.
+        // 在保持活跃状态的持续时间内放置任务，否则将循环清理
         if (keepAliveDuration <= 0) {
             throw new IllegalArgumentException("keepAliveDuration <= 0: " + keepAliveDuration);
         }
     }
 
-    /** Returns the number of idle connections in the pool. */
+    // Returns the number of idle connections in the pool.
+    // 返回连接池内空闲的连接数
     public synchronized int idleConnectionCount() {
         int total = 0;
         for (RealConnection connection : connections) {
@@ -106,8 +114,10 @@ public final class ConnectionPool {
     }
 
     /**
-     * Returns a recycled connection to {@code address}, or null if no such connection exists. The
-     * route is null if the address has not yet been routed.
+     * Returns a recycled connection to {@code address}, or null if no such connection exists.
+     * 返回连接，如果不存在此类连接，则返回空值
+     * The route is null if the address has not yet been routed.
+     * 如果地址尚未路由，则路由为空
      */
     @Nullable RealConnection get(Address address, StreamAllocation streamAllocation, Route route) {
         assert (Thread.holdsLock(this));
@@ -122,7 +132,9 @@ public final class ConnectionPool {
 
     /**
      * Replaces the connection held by {@code streamAllocation} with a shared connection if possible.
+     * 如果可能，将@code streamallocation持有的连接替换为共享连接
      * This recovers when multiple multiplexed connections are created concurrently.
+     * 当同时创建多个多路复用连接时，恢复
      */
     @Nullable Socket deduplicate(Address address, StreamAllocation streamAllocation) {
         assert (Thread.holdsLock(this));
@@ -138,11 +150,14 @@ public final class ConnectionPool {
 
     void put(RealConnection connection) {
         assert (Thread.holdsLock(this));
+        // 没有任何连接时,cleanupRunning = false;
+        // 即没有任何链接时才会去执行executor.execute(cleanupRunnable);
+        // 从而保证每个连接池最多只能运行一个线程。
         if (!cleanupRunning) {
             cleanupRunning = true;
             executor.execute(cleanupRunnable); // 做异步处理任务
         }
-        connections.add(connection);
+        connections.add(connection); // 将连接加入到双端队列
     }
 
     /**
@@ -162,6 +177,7 @@ public final class ConnectionPool {
     }
 
     /** Close and remove all idle connections in the pool. */
+    // 关闭并删除池中的所有空闲连接
     public void evictAll() {
         List<RealConnection> evictedConnections = new ArrayList<>();
         synchronized (this) {
@@ -183,9 +199,14 @@ public final class ConnectionPool {
     /**
      * Performs maintenance on this pool, evicting the connection that has been idle the longest if
      * either it has exceeded the keep alive limit or the idle connections limit.
+     * 对该池执行维护，如果已超过保持活动状态限制或空闲连接限制，则清除空闲时间最长的连接
      *
-     * <p>Returns the duration in nanos to sleep until the next scheduled call to this method. Returns
-     * -1 if no further cleanups are required.
+     * <p>Returns the duration in nanos to sleep until the next scheduled call to this method.
+     * 返回在下次计划调用此方法之前休眠的持续时间（纳秒）
+     *
+     * Returns -1 if no further cleanups are required.
+     * 如果不需要进一步清理，则返回-1
+     *
      */
     long cleanup(long now) {
         int inUseConnectionCount = 0;
@@ -200,6 +221,7 @@ public final class ConnectionPool {
                 RealConnection connection = i.next();
 
                 // If the connection is in use, keep searching.
+                // 如果连接正在使用中，请继续搜索
                 if (pruneAndGetAllocationCount(connection, now) > 0) {
                     inUseConnectionCount++;
                     continue;
@@ -208,6 +230,7 @@ public final class ConnectionPool {
                 idleConnectionCount++;
 
                 // If the connection is ready to be evicted, we're done.
+                // 如果连接准备好被收回，标记为空闲连接
                 long idleDurationNs = now - connection.idleAtNanos;
                 if (idleDurationNs > longestIdleDurationNs) {
                     longestIdleDurationNs = idleDurationNs;
@@ -220,13 +243,14 @@ public final class ConnectionPool {
                     || idleConnectionCount > this.maxIdleConnections) {
                 // We've found a connection to evict. Remove it from the list, then close it below (outside
                 // of the synchronized block).
+                // 如果空闲连接超过5个或者keepalive时间大于5分钟，则将该连接清理掉，然后在下面关闭它（同步块外部）
                 connections.remove(longestIdleConnection); // 这时候就会把连接从集合中移除并关闭
-            } else if (idleConnectionCount > 0) { // 当全部为可用连接
+            } else if (idleConnectionCount > 0) {
                 // A connection will be ready to evict soon.
-                return keepAliveDurationNs - longestIdleDurationNs; // 在这个时间点会再次执行清理回收的操作
-            } else if (inUseConnectionCount > 0) { // 当下有使用连接，但有可能有泄露连接
+                return keepAliveDurationNs - longestIdleDurationNs; // 返回此连接的到期时间，供下次进行清理
+            } else if (inUseConnectionCount > 0) {
                 // All connections are in use. It'll be at least the keep alive duration 'til we run again.
-                return keepAliveDurationNs; // 直接把剩余时间返回，供下次清理使用
+                return keepAliveDurationNs; // 全部都是活跃连接，5分钟时候再进行清理
             } else { // 没有连接
                 // No connections, idle or in use.
                 cleanupRunning = false;
@@ -234,30 +258,40 @@ public final class ConnectionPool {
             }
         }
 
+        // 关闭连接，返回时间0，立即再次进行清理
         closeQuietly(longestIdleConnection.socket());
 
         // Cleanup again immediately.
+        // 立即再次清理
         return 0;
     }
 
     /**
-     * Prunes any leaked allocations and then returns the number of remaining live allocations on
-     * {@code connection}. Allocations are leaked if the connection is tracking them but the
-     * application code has abandoned them. Leak detection is imprecise and relies on garbage
-     * collection.
+     * Prunes any leaked allocations and then returns the number of remaining live allocations on {@code connection}
+     * 删除任何泄漏的分配，然后返回@code connection上剩余的活动分配数
+     *
+     * Allocations are leaked if the connection is tracking them but the application code has abandoned them.
+     * 如果连接正在跟踪分配，但应用程序代码已放弃分配，则会泄漏分配
+     *
+     * Leak detection is imprecise and relies on garbage collection.
+     * 泄漏检测不精确，依赖于垃圾收集。
+     *
      * 如何找到最不活跃的链接呢
      */
     private int pruneAndGetAllocationCount(RealConnection connection, long now) {
+        // 虚引用列表
         List<Reference<StreamAllocation>> references = connection.allocations;
+        // 遍历虚引用列表
         for (int i = 0; i < references.size(); ) {
             Reference<StreamAllocation> reference = references.get(i);
-
+            // 如果虚引用StreamAllocation正在被使用，则跳过进行下一次循环
             if (reference.get() != null) {
-                i++;
+                i++; // 引用计数
                 continue;
             }
 
             // We've discovered a leaked allocation. This is an application bug.
+            // 我们发现了一个泄露的分配。这是一个应用程序bug
             StreamAllocation.StreamAllocationReference streamAllocRef =
                     (StreamAllocation.StreamAllocationReference) reference;
             String message = "A connection to " + connection.route().address().url()
@@ -268,12 +302,13 @@ public final class ConnectionPool {
             connection.noNewStreams = true;
 
             // If this was the last allocation, the connection is eligible for immediate eviction.
+            // 如果所有的StreamAllocation引用都没有了，返回引用计数0
             if (references.isEmpty()) {
                 connection.idleAtNanos = now - keepAliveDurationNs;
                 return 0; // 表示这个连接没有代码引用了
             }
         }
 
-        return references.size();
+        return references.size(); // 返回剩余的活动分配数 (返回引用列表的大小，作为引用计数)
     }
 }
