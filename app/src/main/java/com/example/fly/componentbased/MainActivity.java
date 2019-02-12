@@ -1,6 +1,5 @@
 package com.example.fly.componentbased;
 
-import android.app.Activity;
 import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -11,10 +10,7 @@ import android.widget.Toast;
 import com.alibaba.android.arouter.facade.annotation.Autowired;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
-import com.base.commonlib.di.module.ClientModule_ProvideRetrofitFactory;
 import com.base.commonlib.service.HomeExportService;
-
-import retrofit2.Retrofit;
 
 /**
  * https://www.jianshu.com/u/ea71bb3770b4  // 路由分析的文章
@@ -78,7 +74,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         .navigation();
                 break;
             case R.id.say_hello_tv:
-                Toast.makeText(this, baseService.sayHello("组件化测试使用"), Toast.LENGTH_SHORT).show();
+//                Toast.makeText(this, baseService.sayHello("组件化测试使用"), Toast.LENGTH_SHORT).show();
+                ARouter.getInstance().build("/test/target")
+                        .navigation();
                 break;
             default:
                 break;

@@ -1,8 +1,10 @@
 package com.example.fly.componentbased.okhttp;
 
+import android.support.annotation.Nullable;
+
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
-import javax.annotation.Nullable;
+//import javax.annotation.Nullable;
 
 import okhttp3.Call;
 import okhttp3.Connection;

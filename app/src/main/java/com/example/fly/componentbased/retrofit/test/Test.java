@@ -1,43 +1,27 @@
-package com.example.fly.componentbased;
+package com.example.fly.componentbased.retrofit.test;
 
 import android.support.annotation.NonNull;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.widget.Toast;
-
-import com.alibaba.android.arouter.facade.annotation.Autowired;
-import com.alibaba.android.arouter.facade.annotation.Route;
-import com.alibaba.android.arouter.launcher.ARouter;
-import com.example.fly.componentbased.retrofit.TestThreadExecutor;
-import com.example.fly.componentbased.retrofit.test.ServiceApi;
 
 import java.util.HashMap;
 import java.util.Map;
 
-import okhttp3.OkHttpClient;
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-@Route(path = "/test/target")
-public class TestActivity extends AppCompatActivity {
+public class Test {
 
-    @Autowired
-    public String key3;
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_target);
-        ARouter.getInstance().inject(this);
-        Toast.makeText(this, key3, Toast.LENGTH_LONG).show();
+    public static void main(String[] args) {
 
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("https://api.xxx.com/")
                 .addConverterFactory(GsonConverterFactory.create())
-                .callbackExecutor(new TestThreadExecutor())
                 .build();
 
         ServiceApi service = retrofit.create(ServiceApi.class);
@@ -58,14 +42,12 @@ public class TestActivity extends AppCompatActivity {
                 //请求处理,输出结果
                 assert response.body() != null;
                 response.body().toString();
-                System.out.println("*******" + Thread.currentThread().getName() + "&&&&&&&&");
             }
 
             //请求失败时候的回调
             @Override
             public void onFailure(@NonNull Call<String> call, @NonNull Throwable throwable) {
                 System.out.println("连接失败");
-                System.out.println("*******" + Thread.currentThread().getName() + "&&&&&&&&");
             }
         });
     }

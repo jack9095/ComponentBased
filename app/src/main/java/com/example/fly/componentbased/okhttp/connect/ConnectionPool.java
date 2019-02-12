@@ -1,5 +1,7 @@
 package com.example.fly.componentbased.okhttp.connect;
 
+import android.support.annotation.Nullable;
+
 import java.lang.ref.Reference;
 import java.net.Socket;
 import java.util.ArrayDeque;
@@ -11,7 +13,7 @@ import java.util.concurrent.Executor;
 import java.util.concurrent.SynchronousQueue;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
-import javax.annotation.Nullable;
+//import javax.annotation.Nullable;
 
 import okhttp3.Address;
 import okhttp3.Connection;
@@ -119,7 +121,8 @@ public final class ConnectionPool {
      * The route is null if the address has not yet been routed.
      * 如果地址尚未路由，则路由为空
      */
-    @Nullable RealConnection get(Address address, StreamAllocation streamAllocation, Route route) {
+    @Nullable
+    RealConnection get(Address address, StreamAllocation streamAllocation, Route route) {
         assert (Thread.holdsLock(this));
         for (RealConnection connection : connections) {
             if (connection.isEligible(address, route)) { // 判断连接是否可用

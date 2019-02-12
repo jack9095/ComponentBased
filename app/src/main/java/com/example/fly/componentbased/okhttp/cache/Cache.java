@@ -15,6 +15,8 @@
  */
 package com.example.fly.componentbased.okhttp.cache;
 
+import android.support.annotation.Nullable;
+
 import java.io.Closeable;
 import java.io.File;
 import java.io.Flushable;
@@ -28,7 +30,7 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 import java.util.NoSuchElementException;
-import javax.annotation.Nullable;
+//import javax.annotation.Nullable;
 
 import okhttp3.CacheControl;
 import okhttp3.CipherSuite;
@@ -248,7 +250,8 @@ public final class Cache implements Closeable, Flushable {
      * @param response
      * @return
      */
-    @Nullable CacheRequest put(Response response) {
+    @Nullable
+    CacheRequest put(Response response) {
         String requestMethod = response.request().method();
 
         if (HttpMethod.invalidatesCache(response.request().method())) {
@@ -579,7 +582,7 @@ public final class Cache implements Closeable, Flushable {
                 Headers.Builder varyHeadersBuilder = new Headers.Builder();
                 int varyRequestHeaderLineCount = readInt(source);
                 for (int i = 0; i < varyRequestHeaderLineCount; i++) {
-                    varyHeadersBuilder.addLenient(source.readUtf8LineStrict());
+//                    varyHeadersBuilder.addLenient(source.readUtf8LineStrict());
                 }
                 varyHeaders = varyHeadersBuilder.build();
 
@@ -590,7 +593,7 @@ public final class Cache implements Closeable, Flushable {
                 Headers.Builder responseHeadersBuilder = new Headers.Builder();
                 int responseHeaderLineCount = readInt(source);
                 for (int i = 0; i < responseHeaderLineCount; i++) {
-                    responseHeadersBuilder.addLenient(source.readUtf8LineStrict());
+//                    responseHeadersBuilder.addLenient(source.readUtf8LineStrict());
                 }
                 String sendRequestMillisString = responseHeadersBuilder.get(SENT_MILLIS);
                 String receivedResponseMillisString = responseHeadersBuilder.get(RECEIVED_MILLIS);

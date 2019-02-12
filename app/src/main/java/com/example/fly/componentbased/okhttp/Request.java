@@ -15,12 +15,14 @@
  */
 package com.example.fly.componentbased.okhttp;
 
+import android.support.annotation.Nullable;
+
 import java.net.URL;
 import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import javax.annotation.Nullable;
+//import javax.annotation.Nullable;
 
 import okhttp3.CacheControl;
 import okhttp3.Headers;
@@ -37,11 +39,11 @@ public final class Request {
     final HttpUrl url;
     final String method;
     final Headers headers;
-    final @Nullable
+//    final @Nullable
     RequestBody body;
     final Map<Class<?>, Object> tags;
 
-    private volatile @Nullable
+//    private volatile @Nullable
     CacheControl cacheControl; // Lazily initialized.
 
     Request(Builder builder) {
@@ -64,7 +66,8 @@ public final class Request {
         return headers;
     }
 
-    public @Nullable String header(String name) {
+    public @Nullable
+    String header(String name) {
         return headers.get(name);
     }
 
