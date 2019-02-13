@@ -1,18 +1,3 @@
-/*
- * Copyright (C) 2012-2016 Markus Junginger, greenrobot (http://greenrobot.org)
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
 package org.greenrobot.eventbus;
 
 import java.lang.reflect.InvocationTargetException;
@@ -38,10 +23,12 @@ import java.util.logging.Level;
  */
 public class EventBus {
 
-    /** Log tag, apps may override it. */
+    /**
+     * Log tag, apps may override it.
+     */
     public static String TAG = "EventBus";
 
-    static volatile EventBus defaultInstance;
+    static volatile EventBus defaultInstance; // 单例采用 volatile 修饰符，会降低性能，但能保证EventBus每次取值都是从主内存中读取
 
     private static final EventBusBuilder DEFAULT_BUILDER = new EventBusBuilder();
     private static final Map<Class<?>, List<Class<?>>> eventTypesCache = new HashMap<>();
@@ -59,8 +46,10 @@ public class EventBus {
 
     // @Nullable
     private final MainThreadSupport mainThreadSupport;
-    // @Nullable
+    // @Nullable  主线程中的 poster
     private final Poster mainThreadPoster;
+
+    // 后台线程中的 poster
     private final BackgroundPoster backgroundPoster;
     private final AsyncPoster asyncPoster;
     private final SubscriberMethodFinder subscriberMethodFinder;
@@ -76,7 +65,10 @@ public class EventBus {
     private final int indexCount;
     private final Logger logger;
 
-    /** Convenience singleton for apps using a process-wide EventBus instance. */
+    /**
+     * Convenience singleton for apps using a process-wide EventBus instance.
+     * 双重检查
+     */
     public static EventBus getDefault() {
         if (defaultInstance == null) {
             synchronized (EventBus.class) {
@@ -92,7 +84,9 @@ public class EventBus {
         return new EventBusBuilder();
     }
 
-    /** For unit test primarily. */
+    /**
+     * For unit test primarily.
+     */
     public static void clearCaches() {
         SubscriberMethodFinder.clearCaches();
         eventTypesCache.clear();
@@ -101,6 +95,7 @@ public class EventBus {
     /**
      * Creates a new EventBus instance; each instance is a separate scope in which events are delivered. To use a
      * central bus, consider {@link #getDefault()}.
+     * 创建一个新的 EventBus 实例，每个实例在 events 事件被发送的时候都是一个单独的领域，为了使用一个 事件总线，考虑用 getDefault() 构建。
      */
     public EventBus() {
         this(DEFAULT_BUILDER);
@@ -111,19 +106,39 @@ public class EventBus {
         subscriptionsByEventType = new HashMap<>();
         typesBySubscriber = new HashMap<>();
         stickyEvents = new ConcurrentHashMap<>();
+
+        // 用于线程间调度
         mainThreadSupport = builder.getMainThreadSupport();
         mainThreadPoster = mainThreadSupport != null ? mainThreadSupport.createPoster(this) : null;
         backgroundPoster = new BackgroundPoster(this);
         asyncPoster = new AsyncPoster(this);
+
+        // 用于记录event生成索引
         indexCount = builder.subscriberInfoIndexes != null ? builder.subscriberInfoIndexes.size() : 0;
+
+        // 对已经注解过的Method的查找器，会对所设定过 @Subscriber 注解的的方法查找相应的Event
         subscriberMethodFinder = new SubscriberMethodFinder(builder.subscriberInfoIndexes,
                 builder.strictMethodVerification, builder.ignoreGeneratedIndex);
+
+        // 当调用事件处理函数发生异常是否需要打印Log
         logSubscriberExceptions = builder.logSubscriberExceptions;
+
+        // 当没有订阅者订阅这个消息的时候是否打印Log
         logNoSubscriberMessages = builder.logNoSubscriberMessages;
+
+        // 当调用事件处理函数，如果异常，是否需要发送Subscriber这个事件
         sendSubscriberExceptionEvent = builder.sendSubscriberExceptionEvent;
+
+        // 当没有事件处理函数时，对事件处理是否需要发送sendNoSubscriberEvent这个标志
         sendNoSubscriberEvent = builder.sendNoSubscriberEvent;
+
+        // 是否需要抛出SubscriberException
         throwSubscriberException = builder.throwSubscriberException;
+
+        // 与Event有继承关系的类是否都需要发送
         eventInheritance = builder.eventInheritance;
+
+        // 线程池 Executors.newCachedThreadPool()
         executorService = builder.executorService;
     }
 
@@ -218,7 +233,9 @@ public class EventBus {
         return typesBySubscriber.containsKey(subscriber);
     }
 
-    /** Only updates subscriptionsByEventType, not typesBySubscriber! Caller must update typesBySubscriber. */
+    /**
+     * Only updates subscriptionsByEventType, not typesBySubscriber! Caller must update typesBySubscriber.
+     */
     private void unsubscribeByEventType(Object subscriber, Class<?> eventType) {
         List<Subscription> subscriptions = subscriptionsByEventType.get(eventType);
         if (subscriptions != null) {
@@ -235,7 +252,9 @@ public class EventBus {
         }
     }
 
-    /** Unregisters the given subscriber from all event classes. */
+    /**
+     * Unregisters the given subscriber from all event classes.
+     */
     public synchronized void unregister(Object subscriber) {
         List<Class<?>> subscribedTypes = typesBySubscriber.get(subscriber);
         if (subscribedTypes != null) {
@@ -248,7 +267,9 @@ public class EventBus {
         }
     }
 
-    /** Posts the given event to the event bus. */
+    /**
+     * Posts the given event to the event bus.
+     */
     public void post(Object event) {
         PostingThreadState postingState = currentPostingThreadState.get();
         List<Object> eventQueue = postingState.eventQueue;
@@ -459,7 +480,9 @@ public class EventBus {
         }
     }
 
-    /** Looks up all Class objects including super classes and interfaces. Should also work for interfaces. */
+    /**
+     * Looks up all Class objects including super classes and interfaces. Should also work for interfaces.
+     */
     private static List<Class<?>> lookupAllEventTypes(Class<?> eventClass) {
         synchronized (eventTypesCache) {
             List<Class<?>> eventTypes = eventTypesCache.get(eventClass);
@@ -477,7 +500,9 @@ public class EventBus {
         }
     }
 
-    /** Recurses through super interfaces. */
+    /**
+     * Recurses through super interfaces.
+     */
     static void addInterfaces(List<Class<?>> eventTypes, Class<?>[] interfaces) {
         for (Class<?> interfaceClass : interfaces) {
             if (!eventTypes.contains(interfaceClass)) {
@@ -496,6 +521,8 @@ public class EventBus {
     void invokeSubscriber(PendingPost pendingPost) {
         Object event = pendingPost.event;
         Subscription subscription = pendingPost.subscription;
+
+        // 进行释放 pendingPost
         PendingPost.releasePendingPost(pendingPost);
         if (subscription.active) {
             invokeSubscriber(subscription, event);
@@ -538,7 +565,9 @@ public class EventBus {
         }
     }
 
-    /** For ThreadLocal, much faster to set (and get multiple values). */
+    /**
+     * For ThreadLocal, much faster to set (and get multiple values).
+     */
     final static class PostingThreadState {
         final List<Object> eventQueue = new ArrayList<>();
         boolean isPosting;
