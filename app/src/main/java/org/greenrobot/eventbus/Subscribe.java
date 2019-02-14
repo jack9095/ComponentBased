@@ -1,19 +1,3 @@
-/*
- * Copyright (C) 2012-2016 Markus Junginger, greenrobot (http://greenrobot.org)
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-
 package org.greenrobot.eventbus;
 
 
@@ -23,11 +7,13 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-@Documented
-@Retention(RetentionPolicy.RUNTIME)
-@Target({ElementType.METHOD})
+@Documented  // 命名为 java doc 文档
+@Retention(RetentionPolicy.RUNTIME) // 指定在运行时有效，即在运行时能保持这个 Subscribe
+@Target({ElementType.METHOD})  // 指定类型为 METHOD，表名用来描述方法
 public @interface Subscribe {
-    ThreadMode threadMode() default ThreadMode.POSTING;
+
+    // 指定线程模式，可以指定在 Subscribe 中接收的 Event 所处的线程
+    ThreadMode threadMode() default ThreadMode.POSTING;  // 订阅线程的模式，默认从哪个线程发送，就从哪个线程订阅
 
     /**
      * If true, delivers the most recent sticky event (posted with

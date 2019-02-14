@@ -25,6 +25,8 @@ final class BackgroundPoster implements Runnable, Poster {
             queue.enqueue(pendingPost); // 添加到队列
             if (!executorRunning) {
                 executorRunning = true;
+
+                // 在线程池中执行这个 pendingPost
                 eventBus.getExecutorService().execute(this);
             }
         }
@@ -34,18 +36,26 @@ final class BackgroundPoster implements Runnable, Poster {
     public void run() {
         try {
             try {
+                // 不断循环从 PendingPostQueue 取出 pendingPost 到 eventBus 执行
                 while (true) {
+
+                    // 在 1000 毫秒内从 PendingPostQueue 中获取 pendingPost
                     PendingPost pendingPost = queue.poll(1000);
+
+                    // 双重校验锁判断 pendingPost 是否为 null
                     if (pendingPost == null) {
                         synchronized (this) {
                             // Check again, this time in synchronized
-                            pendingPost = queue.poll();
+                            pendingPost = queue.poll(); // 再次尝试获取 pendingPost
                             if (pendingPost == null) {
                                 executorRunning = false;
                                 return;
                             }
                         }
                     }
+
+                    // 将 pendingPost 通过 EventBus 分发出去
+                    // 这里会将 PendingPostQueue 中【所有】的 pendingPost 都会分发，这里区别于 AsyncPoster
                     eventBus.invokeSubscriber(pendingPost);
                 }
             } catch (InterruptedException e) {

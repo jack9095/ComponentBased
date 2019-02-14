@@ -20,6 +20,16 @@ import java.util.logging.Level;
  * (the event).
  *
  * @author Markus Junginger, greenrobot
+ *
+ * https://blog.csdn.net/wbst5/article/details/81089710
+ *
+ * EventBus 不仅仅获取当前类的订阅方法，还会获取它所有父类的订阅方法
+ *
+ * 在 EventBus 中，一个订阅者包括这个订阅者的所有父类和子类，不会有多个方法相同的去接收同一个事件。
+ *
+ * 但是有可能出现这样一种情况，子类去订阅了该事件，父类也去订阅了该事件。
+ * 当出现这种情况，EventBus 如何判断？通过调用 checkAddWithMethodSignature() 方法，根据方法签名来检查
+ *
  */
 public class EventBus {
 
@@ -51,8 +61,12 @@ public class EventBus {
 
     // 后台线程中的 poster
     private final BackgroundPoster backgroundPoster;
+
+    // 异步线程中的 poster
     private final AsyncPoster asyncPoster;
+
     private final SubscriberMethodFinder subscriberMethodFinder;
+
     private final ExecutorService executorService;
 
     private final boolean throwSubscriberException;
@@ -149,32 +163,50 @@ public class EventBus {
      * Subscribers have event handling methods that must be annotated by {@link Subscribe}.
      * The {@link Subscribe} annotation also allows configuration like {@link
      * ThreadMode} and priority.
+     *
+     * 传进来的是订阅者 subscriber
+     *
      */
     public void register(Object subscriber) {
+        // 通过反射获取到订阅者的对象
         Class<?> subscriberClass = subscriber.getClass();
+
+        // 通过Class对象找到对应的订阅者方法集合
         List<SubscriberMethod> subscriberMethods = subscriberMethodFinder.findSubscriberMethods(subscriberClass);
+
+        // 遍历订阅者方法集合，将订阅者和订阅者放方法想成订阅关系
         synchronized (this) {
+            // 迭代每个 Subscribe 方法，调用 subscribe() 传入 subscriber(订阅者) 和 subscriberMethod(订阅方法) 完成订阅，
             for (SubscriberMethod subscriberMethod : subscriberMethods) {
                 subscribe(subscriber, subscriberMethod);
             }
         }
     }
 
-    // Must be called in synchronized block
+    // Must be called in synchronized block  必须组同步块中调用 eventType 就是我们平时定义的 code
     private void subscribe(Object subscriber, SubscriberMethod subscriberMethod) {
         Class<?> eventType = subscriberMethod.eventType;
+
+        // 创建 Subscription 封装订阅者和订阅方法信息
         Subscription newSubscription = new Subscription(subscriber, subscriberMethod);
+
+        // 可并发读写的 ArrayList，key为 EventType，value为 Subscriptions
+        // 根据事件类型从 subscriptionsByEventType 这个 Map 中获取 Subscription 集合
         CopyOnWriteArrayList<Subscription> subscriptions = subscriptionsByEventType.get(eventType);
+
+        // 如果为 null，表示还没有订阅过，创建并 put 进 Map
         if (subscriptions == null) {
             subscriptions = new CopyOnWriteArrayList<>();
             subscriptionsByEventType.put(eventType, subscriptions);
         } else {
+            // 若subscriptions中已经包含newSubscription，表示该newSubscription已经被订阅过，抛出异常
             if (subscriptions.contains(newSubscription)) {
                 throw new EventBusException("Subscriber " + subscriber.getClass() + " already registered to event "
                         + eventType);
             }
         }
 
+        // 按照优先级插入subscriptions
         int size = subscriptions.size();
         for (int i = 0; i <= size; i++) {
             if (i == size || subscriberMethod.priority > subscriptions.get(i).subscriberMethod.priority) {
@@ -183,24 +215,37 @@ public class EventBus {
             }
         }
 
+        // key为订阅者，value为eventType，用来存放订阅者中的事件类型
         List<Class<?>> subscribedEvents = typesBySubscriber.get(subscriber);
         if (subscribedEvents == null) {
             subscribedEvents = new ArrayList<>();
             typesBySubscriber.put(subscriber, subscribedEvents);
         }
+
+        // 将EventType放入subscribedEvents的集合中
         subscribedEvents.add(eventType);
 
+        //判断是否为Sticky事件
         if (subscriberMethod.sticky) {
+
+            //判断是否设置了事件继承
             if (eventInheritance) {
                 // Existing sticky events of all subclasses of eventType have to be considered.
                 // Note: Iterating over all events may be inefficient with lots of sticky events,
                 // thus data structure should be changed to allow a more efficient lookup
                 // (e.g. an additional map storing sub classes of super classes: Class -> List<Class>).
+                // 获取到所有Sticky事件的Set集合
                 Set<Map.Entry<Class<?>, Object>> entries = stickyEvents.entrySet();
+
+                //遍历所有Sticky事件
                 for (Map.Entry<Class<?>, Object> entry : entries) {
                     Class<?> candidateEventType = entry.getKey();
+
+                    //判断当前事件类型是否为黏性事件或者其子类
                     if (eventType.isAssignableFrom(candidateEventType)) {
                         Object stickyEvent = entry.getValue();
+
+                        // 执行设置了 sticky 模式的订阅方法
                         checkPostStickyEventToSubscription(newSubscription, stickyEvent);
                     }
                 }
