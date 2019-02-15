@@ -12,19 +12,15 @@ import java.util.concurrent.ExecutorService;
 import java.util.logging.Level;
 
 /**
- * EventBus is a central publish/subscribe event system for Android. Events are posted ({@link #post(Object)}) to the
- * bus, which delivers it to subscribers that have a matching handler method for the event type. To receive events,
- * subscribers must register themselves to the bus using {@link #register(Object)}. Once registered, subscribers
- * receive events until {@link #unregister(Object)} is called. Event handling methods must be annotated by
- * {@link Subscribe}, must be public, return nothing (void), and have exactly one parameter
- * (the event).
+ * EventBus是Android的中央发布/订阅事件系统。事件被发布（@link post（object））到总线，总线将事件传递给具有匹配事件类型处理程序方法的订户。
+ * 要接收事件，订户必须使用@link register（object）注册到总线。注册后，订阅服务器将接收事件，直到调用@link unregister（object）。
+ * 事件处理方法必须由@link subscribe注释，必须是公共的，不返回任何内容（void），并且只有一个参数（事件）。
  *
  * @author Markus Junginger, greenrobot
  *
  * https://blog.csdn.net/wbst5/article/details/81089710
  *
  * EventBus 不仅仅获取当前类的订阅方法，还会获取它所有父类的订阅方法
- *
  * 在 EventBus 中，一个订阅者包括这个订阅者的所有父类和子类，不会有多个方法相同的去接收同一个事件。
  *
  * 但是有可能出现这样一种情况，子类去订阅了该事件，父类也去订阅了该事件。
@@ -41,6 +37,8 @@ public class EventBus {
     static volatile EventBus defaultInstance; // 单例采用 volatile 修饰符，会降低性能，但能保证EventBus每次取值都是从主内存中读取
 
     private static final EventBusBuilder DEFAULT_BUILDER = new EventBusBuilder();
+
+    // 发送 post 事件的 map 缓存
     private static final Map<Class<?>, List<Class<?>>> eventTypesCache = new HashMap<>();
 
     private final Map<Class<?>, CopyOnWriteArrayList<Subscription>> subscriptionsByEventType;
@@ -56,7 +54,7 @@ public class EventBus {
     };
 
     // @Nullable
-    private final MainThreadSupport mainThreadSupport;
+    private final MainThreadSupport mainThreadSupport;  // 用于线程间调度
     // @Nullable  主线程中的 poster
     private final Poster mainThreadPoster;
 
@@ -66,18 +64,18 @@ public class EventBus {
     // 异步线程中的 poster
     private final AsyncPoster asyncPoster;
 
-    private final SubscriberMethodFinder subscriberMethodFinder;
+    private final SubscriberMethodFinder subscriberMethodFinder; // 对已经注解过的Method的查找器
 
-    private final ExecutorService executorService;
+    private final ExecutorService executorService;  // 线程池 Executors.newCachedThreadPool()
 
-    private final boolean throwSubscriberException;
-    private final boolean logSubscriberExceptions;
-    private final boolean logNoSubscriberMessages;
-    private final boolean sendSubscriberExceptionEvent;
-    private final boolean sendNoSubscriberEvent;
-    private final boolean eventInheritance;
+    private final boolean throwSubscriberException; // 是否需要抛出SubscriberException
+    private final boolean logSubscriberExceptions; // 当调用事件处理函数发生异常是否需要打印Log
+    private final boolean logNoSubscriberMessages; // 当没有订阅者订阅这个消息的时候是否打印Log
+    private final boolean sendSubscriberExceptionEvent; // 当调用事件处理函数，如果异常，是否需要发送Subscriber这个事件
+    private final boolean sendNoSubscriberEvent;  // 当没有事件处理函数时，对事件处理是否需要发送sendNoSubscriberEvent这个标志
+    private final boolean eventInheritance;  // 与Event有继承关系的类是否都需要发送
 
-    private final int indexCount;
+    private final int indexCount; // 用于记录event生成索引
     private final Logger logger;
 
     /**
@@ -100,7 +98,7 @@ public class EventBus {
     }
 
     /**
-     * For unit test primarily.
+     * For unit test primarily.  主要用于单元测试
      */
     public static void clearCaches() {
         SubscriberMethodFinder.clearCaches();
@@ -108,8 +106,7 @@ public class EventBus {
     }
 
     /**
-     * Creates a new EventBus instance; each instance is a separate scope in which events are delivered. To use a
-     * central bus, consider {@link #getDefault()}.
+     * Creates a new EventBus instance; each instance is a separate scope in which events are delivered. To use acentral bus, consider {@link #getDefault()}.
      * 创建一个新的 EventBus 实例，每个实例在 events 事件被发送的时候都是一个单独的领域，为了使用一个 事件总线，考虑用 getDefault() 构建。
      */
     public EventBus() {
@@ -158,15 +155,10 @@ public class EventBus {
     }
 
     /**
-     * Registers the given subscriber to receive events. Subscribers must call {@link #unregister(Object)} once they
-     * are no longer interested in receiving events.
-     * <p/>
-     * Subscribers have event handling methods that must be annotated by {@link Subscribe}.
-     * The {@link Subscribe} annotation also allows configuration like {@link
-     * ThreadMode} and priority.
+     * 注册给定的订阅服务器以接收事件。一旦订户对接收事件不再感兴趣，他们必须调用 unregister（object）。
+     * 订阅服务器具有必须由 subscribe 注释的事件处理方法。 subscribe注释还允许配置，如 threadMode 和优先级。
      *
      * 传进来的是订阅者 subscriber
-     *
      */
     public void register(Object subscriber) {
         // 通过反射获取到订阅者的对象
@@ -261,6 +253,7 @@ public class EventBus {
         if (stickyEvent != null) {
             // If the subscriber is trying to abort the event, it will fail (event is not tracked in posting state)
             // --> Strange corner case, which we don't take care of here.
+            // 如果订阅者试图中止事件，它将失败（在发布状态下不跟踪事件）奇怪的角落情况，我们在这里不处理。
             postToSubscription(newSubscription, stickyEvent, isMainThread());
         }
     }
@@ -270,6 +263,8 @@ public class EventBus {
      * If there is no main thread support (e.g. non-Android), "true" is always returned. In that case MAIN thread
      * subscribers are always called in posting thread, and BACKGROUND subscribers are always called from a background
      * poster.
+     * 检查当前线程是否正在主线程中运行。
+     * 如果没有主线程支持（如非Android），则始终返回“true”。在这种情况下，在发布线程中总是调用主线程订户，而后台订户总是从后台海报调用
      */
     private boolean isMainThread() {
         return mainThreadSupport != null ? mainThreadSupport.isMainThread() : true;
@@ -281,6 +276,7 @@ public class EventBus {
 
     /**
      * Only updates subscriptionsByEventType, not typesBySubscriber! Caller must update typesBySubscriber.
+     * 只更新subscriptionByEventType，不更新typesbysubscriber！调用方必须更新typesbysubscriber。
      */
     private void unsubscribeByEventType(Object subscriber, Class<?> eventType) {
         List<Subscription> subscriptions = subscriptionsByEventType.get(eventType);
@@ -300,6 +296,7 @@ public class EventBus {
 
     /**
      * Unregisters the given subscriber from all event classes.
+     * 注销
      */
     public synchronized void unregister(Object subscriber) {
         List<Class<?>> subscribedTypes = typesBySubscriber.get(subscriber);
@@ -315,7 +312,6 @@ public class EventBus {
 
     /**
      * Posts the given event to the event bus.
-     *
      * 将给定事件发布到事件总线
      */
     public void post(Object event) {
@@ -377,18 +373,28 @@ public class EventBus {
     /**
      * Posts the given event to the event bus and holds on to the event (because it is sticky). The most recent sticky
      * event of an event's type is kept in memory for future access by subscribers using {@link Subscribe#sticky()}.
+     *
+     * 粘性事件是事件消费者在事件发布之后才注册，依然能接收到该事件的特殊类型。
+     *
+     * StickyEvent 与普通 Event的 普通就在于，EventBus 会自动维护被作为 StickyEvent 被 post 出来
+     * （即在发布事件时使用 EventBus.getDefault().postSticky(new MyEvent()) 方法）的事件的最后一个副本在缓存中。
+     * 任何时候在任何一个订阅了该事件的订阅者中的任何地方，都可以通 EventBus.getDefault().getStickyEvent(MyEvent.class)来取得该类型事件的最后一次缓存。
+     *
+     * sticky（粘性）默认值是 false，如果是 true，那么可以通过 EventBus 的 postSticky 方法分发最近的粘性事件给该订阅者（前提是该事件可获得）。
+     *
+     * 发送黏性事件
      */
     public void postSticky(Object event) {
         synchronized (stickyEvents) {
             stickyEvents.put(event.getClass(), event);
         }
-        // Should be posted after it is putted, in case the subscriber wants to remove immediately
+        // Should be posted after it is putted, in case the subscriber wants to remove immediately 如果订阅者希望立即删除，则应在放入后发布
         post(event);
     }
 
     /**
      * Gets the most recent sticky event for the given type.
-     *
+     * 获取给定类型的最近粘性事件。
      * @see #postSticky(Object)
      */
     public <T> T getStickyEvent(Class<T> eventType) {
@@ -399,7 +405,7 @@ public class EventBus {
 
     /**
      * Remove and gets the recent sticky event for the given event type.
-     *
+     * 移除并获取给定事件类型的最近粘性事件
      * @see #postSticky(Object)
      */
     public <T> T removeStickyEvent(Class<T> eventType) {
@@ -410,8 +416,8 @@ public class EventBus {
 
     /**
      * Removes the sticky event if it equals to the given event.
-     *
-     * @return true if the events matched and the sticky event was removed.
+     * 移除给定事件类型的最近粘性事件。
+     * @return true if the events matched and the sticky event was removed. 如果事件匹配并且是粘性事件被移除
      */
     public boolean removeStickyEvent(Object event) {
         synchronized (stickyEvents) {
@@ -427,7 +433,7 @@ public class EventBus {
     }
 
     /**
-     * Removes all sticky events.
+     * Removes all sticky events. 移除所有的粘性事件
      */
     public void removeAllStickyEvents() {
         synchronized (stickyEvents) {
@@ -435,6 +441,7 @@ public class EventBus {
         }
     }
 
+    // 判断该事件是否已经注册过，即是否有响应的方法
     public boolean hasSubscriberForEvent(Class<?> eventClass) {
         List<Class<?>> eventTypes = lookupAllEventTypes(eventClass);
         if (eventTypes != null) {
@@ -467,17 +474,17 @@ public class EventBus {
     private void postSingleEvent(Object event, PostingThreadState postingState) throws Error {
         Class<?> eventClass = event.getClass();
         boolean subscriptionFound = false;
-        if (eventInheritance) {
-            List<Class<?>> eventTypes = lookupAllEventTypes(eventClass);
+        if (eventInheritance) { // 处理继承事件
+            List<Class<?>> eventTypes = lookupAllEventTypes(eventClass); // 查找所有相关父类及接口
             int countTypes = eventTypes.size();
             for (int h = 0; h < countTypes; h++) {
                 Class<?> clazz = eventTypes.get(h);
-                subscriptionFound |= postSingleEventForEventType(event, postingState, clazz);
+                subscriptionFound |= postSingleEventForEventType(event, postingState, clazz); // 将事件作为特定的类型事件进行发送
             }
         } else {
             subscriptionFound = postSingleEventForEventType(event, postingState, eventClass);
         }
-        if (!subscriptionFound) {
+        if (!subscriptionFound) { // 没有找到注册的处理函数，即还没有注册能够处理该事件的函数，（异常处理）
             if (logNoSubscriberMessages) {
                 logger.log(Level.FINE, "No subscribers registered for event " + eventClass);
             }
@@ -488,16 +495,17 @@ public class EventBus {
         }
     }
 
+    // 进一步深入的发送事件函数：
     private boolean postSingleEventForEventType(Object event, PostingThreadState postingState, Class<?> eventClass) {
         CopyOnWriteArrayList<Subscription> subscriptions;
         synchronized (this) {
-            subscriptions = subscriptionsByEventType.get(eventClass);
+            subscriptions = subscriptionsByEventType.get(eventClass); // 查找是否存在处理eventClass的注册处理函数
         }
-        if (subscriptions != null && !subscriptions.isEmpty()) {
-            for (Subscription subscription : subscriptions) {
+        if (subscriptions != null && !subscriptions.isEmpty()) {  // 有对应的处理函数
+            for (Subscription subscription : subscriptions) {  // 依次分发
                 postingState.event = event;
                 postingState.subscription = subscription;
-                boolean aborted = false;
+                boolean aborted = false;  // 用于确定是否需要继续分发，也许已经被拦截不需要分发了
                 try {
                     postToSubscription(subscription, event, postingState.isMainThread);
                     aborted = postingState.canceled;
@@ -574,6 +582,7 @@ public class EventBus {
 
     /**
      * Looks up all Class objects including super classes and interfaces. Should also work for interfaces.
+     * 看看涉及到lookupAllEventTypes，就是查找到发生事件的所有相关类（父类）
      */
     private static List<Class<?>> lookupAllEventTypes(Class<?> eventClass) {
         synchronized (eventTypesCache) {
@@ -593,7 +602,7 @@ public class EventBus {
     }
 
     /**
-     * Recurses through super interfaces.
+     * Recurses through super interfaces. 遍历父类接口
      */
     static void addInterfaces(List<Class<?>> eventTypes, Class<?>[] interfaces) {
         for (Class<?> interfaceClass : interfaces) {
@@ -609,6 +618,7 @@ public class EventBus {
      * between {@link #unregister(Object)} and event delivery. Otherwise the event might be delivered after the
      * subscriber unregistered. This is particularly important for main thread delivery and registrations bound to the
      * live cycle of an Activity or Fragment.
+     * 采用的是直接发出注册的响应函数的方式
      */
     void invokeSubscriber(PendingPost pendingPost) {
         Object event = pendingPost.event;
@@ -676,7 +686,7 @@ public class EventBus {
     }
 
     /**
-     * For internal use only.
+     * For internal use only. 仅供内部使用
      */
     public Logger getLogger() {
         return logger;

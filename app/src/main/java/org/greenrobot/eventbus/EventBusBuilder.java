@@ -14,19 +14,21 @@ import java.util.concurrent.Executors;
  * Create a new builder using {@link EventBus#builder()}.
  */
 public class EventBusBuilder {
+
+    // 这个就是我们的线程池了，异步任务，后台任务就要靠它来执行了
     private final static ExecutorService DEFAULT_EXECUTOR_SERVICE = Executors.newCachedThreadPool();
 
-    boolean logSubscriberExceptions = true;
-    boolean logNoSubscriberMessages = true;
-    boolean sendSubscriberExceptionEvent = true;
-    boolean sendNoSubscriberEvent = true;
-    boolean throwSubscriberException;
-    boolean eventInheritance = true;
-    boolean ignoreGeneratedIndex;
-    boolean strictMethodVerification;
-    ExecutorService executorService = DEFAULT_EXECUTOR_SERVICE;
-    List<Class<?>> skipMethodVerificationForClasses;
-    List<SubscriberInfoIndex> subscriberInfoIndexes;
+    boolean logSubscriberExceptions = true;  //订阅者异常日志
+    boolean logNoSubscriberMessages = true;  //不要订阅者消息日志
+    boolean sendSubscriberExceptionEvent = true; //是否发送订阅者异常
+    boolean sendNoSubscriberEvent = true;  //是否发送无订阅者异常
+    boolean throwSubscriberException;  // 是否抛出订阅者异常
+    boolean eventInheritance = true;   // 是否继承事件
+    boolean ignoreGeneratedIndex;      // 是否忽略生成的索引
+    boolean strictMethodVerification; // 是否严格执行方法验证
+    ExecutorService executorService = DEFAULT_EXECUTOR_SERVICE; // 默认线程池
+    List<Class<?>> skipMethodVerificationForClasses;   // 需要跳过执行方法验证的类
+    List<SubscriberInfoIndex> subscriberInfoIndexes;   // 订阅者信息索引
     Logger logger;
     MainThreadSupport mainThreadSupport;
 
