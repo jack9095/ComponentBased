@@ -47,6 +47,7 @@ public class EventBus {
     private final Map<Object, List<Class<?>>> typesBySubscriber;
     private final Map<Class<?>, Object> stickyEvents;
 
+    // currentPostingThreadState
     private final ThreadLocal<PostingThreadState> currentPostingThreadState = new ThreadLocal<PostingThreadState>() {
         @Override
         protected PostingThreadState initialValue() {
@@ -190,7 +191,7 @@ public class EventBus {
         // 创建 Subscription 封装订阅者和订阅方法信息
         Subscription newSubscription = new Subscription(subscriber, subscriberMethod);
 
-        // 可并发读写的 ArrayList，key为 EventType，value为 Subscriptions
+        // 可并发读写的 ArrayList（CopyOnWriteArrayList)），key为 EventType，value为 Subscriptions
         // 根据事件类型从 subscriptionsByEventType 这个 Map 中获取 Subscription 集合
         CopyOnWriteArrayList<Subscription> subscriptions = subscriptionsByEventType.get(eventType);
 
@@ -314,23 +315,36 @@ public class EventBus {
 
     /**
      * Posts the given event to the event bus.
+     *
+     * 将给定事件发布到事件总线
      */
     public void post(Object event) {
+
+        // 获取当前线程的 posting 状态
         PostingThreadState postingState = currentPostingThreadState.get();
+
+        // 获取当前事件队列
         List<Object> eventQueue = postingState.eventQueue;
+
+        // 将事件添加进当前线程的事件队列
         eventQueue.add(event);
 
+        // 判断是否正在posting
         if (!postingState.isPosting) {
             postingState.isMainThread = isMainThread();
             postingState.isPosting = true;
+
+            // 如果已经取消，则抛出异常
             if (postingState.canceled) {
                 throw new EventBusException("Internal error. Abort state was not reset");
             }
             try {
                 while (!eventQueue.isEmpty()) {
+                    // 发送事件
                     postSingleEvent(eventQueue.remove(0), postingState);
                 }
             } finally {
+                // 状态复原
                 postingState.isPosting = false;
                 postingState.isMainThread = false;
             }
@@ -439,6 +453,17 @@ public class EventBus {
         return false;
     }
 
+    /**
+     * 发送事件
+     *
+     * EventBus 用 ThreadLocal 存储每个线程的 PostingThreadState，一个存储了事件发布状态的类，
+     * 当 post 一个事件时，添加到事件队列末尾，等待前面的事件发布完毕后再拿出来发布，
+     * 这里看事件发布的关键代码postSingleEvent()
+     *
+     * @param event
+     * @param postingState
+     * @throws Error
+     */
     private void postSingleEvent(Object event, PostingThreadState postingState) throws Error {
         Class<?> eventClass = event.getClass();
         boolean subscriptionFound = false;
@@ -490,18 +515,32 @@ public class EventBus {
         return false;
     }
 
+    /**
+     * 订阅者五种线程模式的特点对应的就是以上代码，简单来讲就是订阅者指定了在哪个线程订阅事件，无论发布者在哪个线程，它都会将事件发布到订阅者指定的线程
+     * @param subscription
+     * @param event
+     * @param isMainThread
+     */
     private void postToSubscription(Subscription subscription, Object event, boolean isMainThread) {
         switch (subscription.subscriberMethod.threadMode) {
+
+            // 订阅线程跟随发布线程，EventBus 默认的订阅方式
             case POSTING:
-                invokeSubscriber(subscription, event);
+                invokeSubscriber(subscription, event);  // 订阅线程和发布线程相同，直接订阅
                 break;
+
+            // 订阅线程为主线程
             case MAIN:
-                if (isMainThread) {
+                if (isMainThread) { // 如果 post是在 UI 线程，直接调用 invokeSubscriber
                     invokeSubscriber(subscription, event);
                 } else {
+
+                    // 如果不在 UI 线程，用 mainThreadPoster 进行调度，即上文讲述的 HandlerPoster 的 Handler 异步处理，将订阅线程切换到主线程订阅
                     mainThreadPoster.enqueue(subscription, event);
                 }
                 break;
+
+            // 订阅线程为主线程
             case MAIN_ORDERED:
                 if (mainThreadPoster != null) {
                     mainThreadPoster.enqueue(subscription, event);
@@ -510,14 +549,22 @@ public class EventBus {
                     invokeSubscriber(subscription, event);
                 }
                 break;
+
+            // 订阅线程为后台线程
             case BACKGROUND:
+
+                // 如果在 UI 线程，则将 subscription 添加到后台线程的线程池
                 if (isMainThread) {
                     backgroundPoster.enqueue(subscription, event);
                 } else {
+                    // 不在UI线程，直接分发
                     invokeSubscriber(subscription, event);
                 }
                 break;
+
+            // 订阅线程为异步线程
             case ASYNC:
+                // 使用线程池线程订阅
                 asyncPoster.enqueue(subscription, event);
                 break;
             default:
@@ -612,14 +659,16 @@ public class EventBus {
 
     /**
      * For ThreadLocal, much faster to set (and get multiple values).
+     *
+     * 发送事件的线程封装类
      */
     final static class PostingThreadState {
-        final List<Object> eventQueue = new ArrayList<>();
-        boolean isPosting;
-        boolean isMainThread;
+        final List<Object> eventQueue = new ArrayList<>();  // 事件队列
+        boolean isPosting; // 是否正在 posting
+        boolean isMainThread;  // 是否为主线程
         Subscription subscription;
         Object event;
-        boolean canceled;
+        boolean canceled; // 是否已经取消
     }
 
     ExecutorService getExecutorService() {
