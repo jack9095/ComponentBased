@@ -325,7 +325,7 @@ public class EventBus {
         // 将事件添加进当前线程的事件队列
         eventQueue.add(event);
 
-        // 判断是否正在posting
+        // 判断是否正在posting（发送)）
         if (!postingState.isPosting) {
             postingState.isMainThread = isMainThread();
             postingState.isPosting = true;
@@ -335,7 +335,7 @@ public class EventBus {
                 throw new EventBusException("Internal error. Abort state was not reset");
             }
             try {
-                while (!eventQueue.isEmpty()) {
+                while (!eventQueue.isEmpty()) { // 循环从事件队列中取出事件
                     // 发送事件
                     postSingleEvent(eventQueue.remove(0), postingState);
                 }
@@ -490,7 +490,7 @@ public class EventBus {
             }
             if (sendNoSubscriberEvent && eventClass != NoSubscriberEvent.class &&
                     eventClass != SubscriberExceptionEvent.class) {
-                post(new NoSubscriberEvent(this, event));
+                post(new NoSubscriberEvent(this, event)); // 如果没有人和订阅者订阅发送 NoSubscriberEvent
             }
         }
     }
@@ -499,7 +499,7 @@ public class EventBus {
     private boolean postSingleEventForEventType(Object event, PostingThreadState postingState, Class<?> eventClass) {
         CopyOnWriteArrayList<Subscription> subscriptions;
         synchronized (this) {
-            subscriptions = subscriptionsByEventType.get(eventClass); // 查找是否存在处理eventClass的注册处理函数
+            subscriptions = subscriptionsByEventType.get(eventClass); // 查找是否存在处理eventClass的注册处理函数 （查找该事件的所有订阅者）
         }
         if (subscriptions != null && !subscriptions.isEmpty()) {  // 有对应的处理函数
             for (Subscription subscription : subscriptions) {  // 依次分发
