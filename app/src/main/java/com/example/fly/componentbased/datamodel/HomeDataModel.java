@@ -1,18 +1,41 @@
 package com.example.fly.componentbased.datamodel;
 
-import android.arch.lifecycle.MutableLiveData;
 import com.example.fly.componentbased.api.ApiDataModel;
+import com.example.fly.componentbased.api.CallBack;
+import com.example.fly.componentbased.api.RxSchedulers;
+import com.example.fly.componentbased.api.RxSubscriber;
 import com.example.fly.componentbased.bean.HomeResponse;
+
+import rx.Observable;
 
 public class HomeDataModel extends ApiDataModel {
 
-    private MutableLiveData<HomeResponse> homeMutableLiveData;  // 存储首页数据的 MutableLiveData
 
-    public MutableLiveData<HomeResponse> getHomeMutableLiveData(){
-        if (homeMutableLiveData == null) {
-            homeMutableLiveData = new MutableLiveData<>();
-        }
-        return homeMutableLiveData;
+    public void requestNetWorkData(CallBack listener){
+        Observable<HomeResponse> homeResponseObservable = serviceApi.requestHomeData();
+        addSubscribe(
+                homeResponseObservable
+                .compose(RxSchedulers.io_main())
+                .subscribe(new RxSubscriber<Object>() {
+
+                    @Override
+                    protected void onNoNetWork() {
+                        super.onNoNetWork();
+                        listener.onNoNetWork();
+                    }
+
+                    @Override
+                    public void onSuccess(Object o) {
+                        listener.onNext(o);
+                    }
+
+                    @Override
+                    public void onFailure(String msg) {
+                        listener.onError(msg);
+                    }
+                }));
     }
+
+
 
 }
