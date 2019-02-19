@@ -1,4 +1,4 @@
-package com.example.fly.componentbased;
+package com.example.fly.componentbased.test;
 
 public interface Test {
 

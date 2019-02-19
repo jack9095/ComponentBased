@@ -1,4 +1,4 @@
-package com.example.fly.componentbased;
+package com.example.fly.componentbased.test;
 
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -8,6 +8,7 @@ import android.widget.Toast;
 import com.alibaba.android.arouter.facade.annotation.Autowired;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
+import com.example.fly.componentbased.R;
 import com.example.fly.componentbased.retrofit.TestThreadExecutor;
 import com.example.fly.componentbased.retrofit.test.ServiceApi;
 
@@ -21,7 +22,7 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-@Route(path = "/test/target")
+//@Route(path = "/test/target")
 public class TestActivity extends AppCompatActivity {
 
     @Autowired

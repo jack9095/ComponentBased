@@ -3,8 +3,6 @@ package com.base.commonlib;
 import android.content.Context;
 import android.content.SharedPreferences;
 
-import retrofit2.Retrofit;
-
 public class PreferencesHelper {
     private static final String SETTING = "setting";
     private static final String ID = "USER_ID";
@@ -24,7 +22,6 @@ public class PreferencesHelper {
 
     public String getCurrentUserId() {
         return mPref.getString(ID, null);
-
     }
 
     public boolean isLogined() {

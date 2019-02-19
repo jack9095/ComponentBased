@@ -1,1 +1,7 @@
-include ':app', ':commonlibrary', ':home', ':live', ':video', ':message'
+include ':app'
+include ':commonlibrary'
+include ':home'
+include ':live'
+include ':video'
+include ':message'
+include ':bottomnavigationbar'
