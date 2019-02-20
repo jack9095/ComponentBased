@@ -8,10 +8,13 @@ import com.example.fly.componentbased.bean.HomeResponse;
 
 import rx.Observable;
 
+/**
+ * 网络请求和数据库，持久层的操作
+ */
 public class HomeDataModel extends ApiDataModel {
 
 
-    public void requestNetWorkData(CallBack listener){
+    public void requestNetWorHomekData(CallBack listener){
         Observable<HomeResponse> homeResponseObservable = serviceApi.requestHomeData();
         addSubscribe(
                 homeResponseObservable

@@ -3,6 +3,8 @@ package com.example.fly.componentbased.app;
 
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.base.commonlib.base.mvp_no_dagger.BaseApplication;
+import com.example.fly.componentbased.api.HttpHelper;
+import com.example.fly.componentbased.api.URL;
 
 
 public class App extends BaseApplication {
@@ -12,6 +14,10 @@ public class App extends BaseApplication {
     @Override
     public void onCreate() {
         super.onCreate();
+        new HttpHelper.Builder()
+                .initOkHttp()
+                .createRetrofit(URL.BASE_URL)
+                .build();
         initARouter();
     }
 

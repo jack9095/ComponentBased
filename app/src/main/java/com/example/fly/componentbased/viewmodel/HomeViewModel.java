@@ -9,6 +9,9 @@ import com.example.fly.componentbased.api.CallBack;
 import com.example.fly.componentbased.bean.HomeResponse;
 import com.example.fly.componentbased.datamodel.HomeDataModel;
 
+/**
+ * 业务逻辑处理
+ */
 public class HomeViewModel extends NetWorkBaseViewModel<HomeDataModel> {
 
     public HomeViewModel(@NonNull Application application) {
@@ -24,10 +27,10 @@ public class HomeViewModel extends NetWorkBaseViewModel<HomeDataModel> {
         return homeMutableLiveData;
     }
 
-    public void getRequestMerge() {
+    // 发起网络请求
+    public void getRequestHomeData() {
 
-        // 首页合并的网络请求
-        mRepository.requestNetWorkData(new CallBack<Object>() {
+        mRepository.requestNetWorHomekData(new CallBack<Object>() {
             @Override
             public void onNoNetWork() {
                 loadState.postValue(StateConstants.NET_WORK_STATE);
@@ -40,7 +43,6 @@ public class HomeViewModel extends NetWorkBaseViewModel<HomeDataModel> {
                     homeMutableLiveData.postValue(homeResponse);
                     loadState.postValue(StateConstants.SUCCESS_STATE);
                 }
-
             }
 
             @Override

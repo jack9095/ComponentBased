@@ -7,6 +7,6 @@ import rx.Observable;
 
 public interface ServiceApi {
 
-    @GET("http://wanandroid.com/article/listproject/0/json")
+    @GET("article/listproject/0/json")
     Observable<HomeResponse> requestHomeData();
 }

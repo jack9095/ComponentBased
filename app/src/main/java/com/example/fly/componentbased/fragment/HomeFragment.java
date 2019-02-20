@@ -3,109 +3,121 @@ package com.example.fly.componentbased.fragment;
 import android.arch.lifecycle.Observer;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.StaggeredGridLayoutManager;
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.TextView;
 
-import com.example.fly.mvvm.AdapterPool;
-import com.example.fly.mvvm.R;
-import com.example.fly.mvvm.base.BaseListFragment;
-import com.example.fly.mvvm.core.bean.pojo.book.BookList;
-import com.example.fly.mvvm.core.bean.pojo.common.TypeVo;
-import com.example.fly.mvvm.core.bean.pojo.home.CatagoryVo;
-import com.example.fly.mvvm.core.bean.pojo.home.HomeMergeVo;
-import com.example.fly.mvvm.core.vm.HomeViewModel;
-import com.trecyclerview.multitype.MultiTypeAdapter;
+import com.alibaba.android.arouter.facade.annotation.Autowired;
+import com.alibaba.android.arouter.launcher.ARouter;
+import com.base.commonlib.AACBase.network.BaseLifecycleFragment;
+import com.base.commonlib.service.HomeExportService;
+import com.example.fly.componentbased.R;
+import com.example.fly.componentbased.bean.HomeResponse;
+import com.example.fly.componentbased.viewmodel.HomeViewModel;
 
 /**
  * 首页
  */
-public class HomeFragment extends BaseListFragment<HomeViewModel> {
+public class HomeFragment extends BaseLifecycleFragment<HomeViewModel> implements View.OnClickListener {
+
+    private TextView chat_tv;
+    private TextView contract_tv;
+    private TextView find_tv;
+    private TextView mine_tv;
+    private TextView say_hello_tv;
+
+    @Autowired(name = "/home/HomeService")
+    public HomeExportService baseService;
 
     public static HomeFragment newInstance() {
         return new HomeFragment();
     }
 
     @Override
-    public void initView(final Bundle state) {
-        super.initView(state);
-        setTitle(getResources().getString(R.string.home_title_name));
-    }
-
-    @Override
     protected void dataObserver() {
-        mViewModel.getMergeData().observe(this, new Observer<HomeMergeVo>() {
+        mViewModel.getHomeMutableLiveData().observe(this, new Observer<HomeResponse>() {
             @Override
-            public void onChanged(@Nullable HomeMergeVo homeMergeVo) {
+            public void onChanged(@Nullable HomeResponse homeResponse) {
 
             }
         });
-        mViewModel.getMergeData().observe(this, homeMergeVo -> {
-            if (homeMergeVo != null) {
-                addItems(homeMergeVo);
+        mViewModel.getHomeMutableLiveData().observe(this, homeResponse -> {
+            if (homeResponse != null) {
+                addItems(homeResponse);
             }
         });
-    }
-
-    @Override
-    protected void lazyLoad() {
-        super.lazyLoad();
-        getNetWorkData();
-    }
-
-    @Override
-    protected void onStateRefresh() {
-        super.onStateRefresh();
-        getNetWorkData();
-    }
-
-    @Override
-    public void onRefresh() {
-        super.onRefresh();
-        getNetWorkData();
-    }
-
-    @Override
-    protected RecyclerView.LayoutManager createLayoutManager() {
-        return new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
-    }
-
-    @Override
-    protected MultiTypeAdapter createAdapter() {
-        return AdapterPool.newInstance().getHomeAdapter(getActivity());
-    }
-
-    protected void getNetWorkData() {
-        mViewModel.getRequestMerge();
     }
 
     /**
      * 列表展示数据
-     * @param homeMergeVo
      */
-    private void addItems(HomeMergeVo homeMergeVo) {
-        newItems.add(homeMergeVo.bannerListVo);
-        newItems.add(new CatagoryVo("title"));
-        newItems.add(new TypeVo(getResources().getString(R.string.recommend_live_type)));
-        if (homeMergeVo.homeListVo.data.live_recommend.size() > 0) {
-            newItems.addAll(homeMergeVo.homeListVo.data.live_recommend);
-        }
-        newItems.add(new TypeVo(getResources().getString(R.string.recommend_video_type)));
-        if (homeMergeVo.homeListVo.data.course.size() > 0) {
-            newItems.addAll(homeMergeVo.homeListVo.data.course);
-        }
-        newItems.add(new TypeVo(getResources().getString(R.string.recommend_book_type)));
-        if (homeMergeVo.homeListVo.data.publishingbook.size() > 0) {
-            newItems.add(new BookList(homeMergeVo.homeListVo.data.publishingbook));
-        }
-        newItems.add(new TypeVo(getResources().getString(R.string.special_tab_name)));
-        if (homeMergeVo.homeListVo.data.matreialsubject.size() > 0) {
-            newItems.addAll(homeMergeVo.homeListVo.data.matreialsubject);
-        }
-        oldItems.clear();
-        oldItems.addAll(newItems);
-        mRecyclerView.refreshComplete(oldItems, true);
-        newItems.clear();
-
+    private void addItems(HomeResponse homeResponse) {
+        Log.e("HomeFragment = ",homeResponse.toString());
     }
 
+    @Override
+    protected View initLayout(LayoutInflater inflater, ViewGroup container) {
+        return inflater.inflate(R.layout.activity_target, null);
+    }
+
+    @Override
+    public void initView() {
+        super.initView();
+        ARouter.getInstance().inject(this);
+
+        chat_tv = view.findViewById(R.id.chat_tv);
+        contract_tv = view.findViewById(R.id.contract_tv);
+        find_tv = view.findViewById(R.id.find_tv);
+        mine_tv = view.findViewById(R.id.mine_tv);
+        say_hello_tv = view.findViewById(R.id.say_hello_tv);
+
+        chat_tv.setOnClickListener(this);
+        contract_tv.setOnClickListener(this);
+        find_tv.setOnClickListener(this);
+        mine_tv.setOnClickListener(this);
+        say_hello_tv.setOnClickListener(this);
+    }
+
+    @Override
+    protected void initData(Bundle savedInstanceState) {
+        mViewModel.getRequestHomeData();
+    }
+
+    @Override
+    protected boolean isBindEventBusHere() {
+        return false;
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.chat_tv:
+                ARouter.getInstance().build("/message/main")
+                        .withLong("key1", 666L)
+                        .withString("key3", "888")
+                        .navigation();
+                break;
+            case R.id.contract_tv:
+                ARouter.getInstance().build("/home/main")
+                        .navigation();
+                break;
+            case R.id.find_tv:
+                ARouter.getInstance().build("/video/main")
+                        .navigation();
+                break;
+            case R.id.mine_tv:
+                ARouter.getInstance().build("/live/main")
+                        .navigation();
+                break;
+            case R.id.say_hello_tv:
+//                Toast.makeText(this, baseService.sayHello("组件化测试使用"), Toast.LENGTH_SHORT).show();
+                ARouter.getInstance().build("/test/target")
+                        .navigation();
+                break;
+            default:
+                break;
+        }
+    }
 }

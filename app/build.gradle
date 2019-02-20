@@ -166,10 +166,10 @@ dependencies {
         implementation project(':live')
     }
     implementation project(':commonlibrary')
-    implementation project(':bottomnavigationbar')
     //            {
     //        exclude module: 'support-v4'//根据组件名排除
     //        exclude group: 'android.support.v4'//根据包名排除
     //    }
     implementation 'com.android.databinding:library:3.3.1'
+    implementation project(':bottomnavigationbar')
 }

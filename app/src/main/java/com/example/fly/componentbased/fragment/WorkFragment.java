@@ -13,7 +13,7 @@ public class WorkFragment extends BaseFragment {
 
     @Override
     protected View initLayout(LayoutInflater inflater, ViewGroup container) {
-        return inflater.inflate(R.layout.activity_target,container);
+        return inflater.inflate(R.layout.activity_target,null);
     }
 
     @Override
