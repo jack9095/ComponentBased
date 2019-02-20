@@ -3,6 +3,8 @@ package com.example.fly.componentbased.viewmodel;
 import android.app.Application;
 import android.arch.lifecycle.MutableLiveData;
 import android.support.annotation.NonNull;
+import android.util.Log;
+
 import com.base.commonlib.AACBase.network.NetWorkBaseViewModel;
 import com.base.commonlib.constant.StateConstants;
 import com.example.fly.componentbased.api.CallBack;
@@ -33,6 +35,7 @@ public class HomeViewModel extends NetWorkBaseViewModel<HomeDataModel> {
         mRepository.requestNetWorHomekData(new CallBack<Object>() {
             @Override
             public void onNoNetWork() {
+                Log.e("HomeViewModel 错误 = ", "网络异常");
                 loadState.postValue(StateConstants.NET_WORK_STATE);
             }
 
@@ -47,7 +50,7 @@ public class HomeViewModel extends NetWorkBaseViewModel<HomeDataModel> {
 
             @Override
             public void onError(String e) {
-
+                Log.e("HomeViewModel 错误 = ", e);
             }
         });
     }

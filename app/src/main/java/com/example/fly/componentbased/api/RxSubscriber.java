@@ -1,5 +1,7 @@
 package com.example.fly.componentbased.api;
 
+import android.util.Log;
+
 import com.google.gson.JsonParseException;
 import org.json.JSONException;
 import java.net.ConnectException;
@@ -38,7 +40,7 @@ public abstract class RxSubscriber<T> extends Subscriber<T> {
 
     @Override
     public void onError(Throwable e) {
-        String message = null;
+        String message = "";
         if (e instanceof UnknownHostException) {
             message = "没有网络";
         } else if (e instanceof HttpException) {
@@ -54,6 +56,7 @@ public abstract class RxSubscriber<T> extends Subscriber<T> {
 //            message = ((ServerException) e).message;
         }
         onFailure(message);
+        Log.e("RxSubscriber 错误 = ", e != null ? e.toString() : "null");
     }
 
     @Override
