@@ -5,19 +5,30 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
 
+    <!--<application-->
+        <!--android:name=".app.App"-->
+        <!--android:allowBackup="true"-->
+        <!--android:appComponentFactory="任意字符"-->
+        <!--android:icon="@mipmap/ic_launcher"-->
+        <!--android:label="@string/app_name"-->
+        <!--android:roundIcon="@mipmap/ic_launcher_round"-->
+        <!--android:supportsRtl="true"-->
+        <!--android:theme="@style/AppTheme"-->
+        <!--android:usesCleartextTraffic="true"-->
+        <!--tools:ignore="AllowBackup,GoogleAppIndexingWarning"-->
+        <!--tools:replace="android:icon, android:label,android:theme,android:appComponentFactory"-->
+        <!--tools:targetApi="m">-->
+
     <application
         android:name=".app.App"
         android:allowBackup="true"
-        android:appComponentFactory="任意字符"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
-        tools:ignore="AllowBackup,GoogleAppIndexingWarning"
         android:usesCleartextTraffic="true"
-        tools:replace="android:icon, android:label,android:theme,android:appComponentFactory"
-        tools:targetApi="m">
+        tools:ignore="GoogleAppIndexingWarning">
 
         <!-- <meta-data -->
         <!-- android:name="design_width" -->
@@ -39,14 +50,21 @@
         <!-- android:value="umeng" /> -->
 
         <activity android:name=".MainActivity">
+            <!--<intent-filter>-->
+                <!--<action android:name="android.intent.action.MAIN" />-->
+
+                <!--<category android:name="android.intent.category.LAUNCHER" />-->
+            <!--</intent-filter>-->
+        </activity>
+        <activity android:name=".test.TestActivity" />
+        <activity android:name=".test.jetpack.DemoActivity" />
+        <activity android:name=".test.dagger.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".test.TestActivity" />
-        <activity android:name=".test.jetpack.DemoActivity"></activity>
     </application>
 
 </manifest>

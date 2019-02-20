@@ -15,19 +15,19 @@ public class NetWorkBaseViewModel<T extends BaseDataModel> extends AndroidViewMo
 
     public MutableLiveData<String> loadState; // 网络加载状态的 LiveData
 
-    public T mRepository;
+    public T mDataModel;
 
     public NetWorkBaseViewModel(@NonNull Application application) {
         super(application);
         loadState = new MutableLiveData<>();
-        mRepository = TUtil.getNewInstance(this, 0);
+        mDataModel = TUtil.getNewInstance(this, 0);
     }
 
     @Override
     protected void onCleared() {
         super.onCleared();
-        if (mRepository != null) {
-            mRepository.unSubscribe();  // 清除所有订阅 释放内存 （Rx)）
+        if (mDataModel != null) {
+            mDataModel.unSubscribe();  // 清除所有订阅 释放内存 （Rx)）
         }
     }
 }

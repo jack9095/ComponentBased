@@ -32,7 +32,7 @@ public class HomeViewModel extends NetWorkBaseViewModel<HomeDataModel> {
     // 发起网络请求
     public void getRequestHomeData() {
 
-        mRepository.requestNetWorHomekData(new CallBack<Object>() {
+        mDataModel.requestNetWorHomekData(new CallBack<Object>() {
             @Override
             public void onNoNetWork() {
                 Log.e("HomeViewModel 错误 = ", "网络异常");

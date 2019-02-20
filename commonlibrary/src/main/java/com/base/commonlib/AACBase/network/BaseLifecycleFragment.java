@@ -28,7 +28,7 @@ public abstract class BaseLifecycleFragment<T extends NetWorkBaseViewModel> exte
     }
 
     /**
-     * 创建 自实现的 ViewModel
+     * 创建 自定义的 ViewModel
      */
     protected <T extends ViewModel> T createViewModel(Fragment fragment, @NonNull Class<T> modelClass) {
         ViewModelProvider viewModelProvider = ViewModelProviders.of(fragment);
