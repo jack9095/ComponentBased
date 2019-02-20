@@ -35,9 +35,10 @@ public abstract class BaseLifecycleFragment<T extends NetWorkBaseViewModel> exte
         return viewModelProvider.get(modelClass);
     }
 
-    protected void dataObserver() {
-
-    }
+    /**
+     *  LiveData 观察者回调实现的方法
+     */
+    protected abstract void dataObserver();
 
     /**
      * 获取网络数据
