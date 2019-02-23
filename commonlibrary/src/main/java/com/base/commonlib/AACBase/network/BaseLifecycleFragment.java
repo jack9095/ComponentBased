@@ -11,7 +11,7 @@ import android.support.v4.app.Fragment;
 import android.text.TextUtils;
 import com.base.commonlib.AACBase.BaseFragment;
 import com.base.commonlib.constant.StateConstants;
-import com.base.commonlib.utils.TUtil;
+import com.base.commonlib.utils.DemoUtil;
 
 public abstract class BaseLifecycleFragment<T extends NetWorkBaseViewModel> extends BaseFragment {
 
@@ -19,7 +19,7 @@ public abstract class BaseLifecycleFragment<T extends NetWorkBaseViewModel> exte
 
     @Override
     public void initView() {
-        mViewModel = createViewModel(this, (Class<T>) TUtil.getInstance(this, 0));
+        mViewModel = createViewModel(this, (Class<T>) DemoUtil.getInstance(this, 0));
         if (null != mViewModel) {
             MutableLiveData loadState = mViewModel.loadState;
             loadState.observe(this, observer);
@@ -40,13 +40,6 @@ public abstract class BaseLifecycleFragment<T extends NetWorkBaseViewModel> exte
      */
     protected abstract void dataObserver();
 
-    /**
-     * 获取网络数据
-     */
-    protected void getRemoteData() {
-
-    }
-
     // lifecycle 中 liveData的监听者
     protected Observer<String> observer = new Observer<String>() {
         @Override
@@ -64,5 +57,4 @@ public abstract class BaseLifecycleFragment<T extends NetWorkBaseViewModel> exte
             }
         }
     };
-
 }

@@ -19,6 +19,7 @@ import com.example.fly.componentbased.viewmodel.HomeViewModel;
 
 /**
  * 首页
+ * https://www.jianshu.com/p/35d143e84d42
  */
 public class HomeFragment extends BaseLifecycleFragment<HomeViewModel> implements View.OnClickListener {
 
@@ -40,12 +41,7 @@ public class HomeFragment extends BaseLifecycleFragment<HomeViewModel> implement
         mViewModel.getHomeMutableLiveData().observe(this, new Observer<HomeResponse>() {
             @Override
             public void onChanged(@Nullable HomeResponse homeResponse) {
-
-            }
-        });
-        mViewModel.getHomeMutableLiveData().observe(this, homeResponse -> {
-            if (homeResponse != null) {
-                addItems(homeResponse);
+                showData(homeResponse);
             }
         });
     }
@@ -53,7 +49,7 @@ public class HomeFragment extends BaseLifecycleFragment<HomeViewModel> implement
     /**
      * 列表展示数据
      */
-    private void addItems(HomeResponse homeResponse) {
+    private void showData(HomeResponse homeResponse) {
         Log.e("HomeFragment = ",homeResponse.toString());
     }
 

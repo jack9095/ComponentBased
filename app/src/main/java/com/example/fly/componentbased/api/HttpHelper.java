@@ -8,7 +8,7 @@ import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
-import static com.base.commonlib.utils.TUtil.checkNotNull;
+import static com.base.commonlib.utils.DemoUtil.checkNotNull;
 
 /**
  * 网络请求帮助类

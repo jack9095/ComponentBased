@@ -9,7 +9,8 @@ import com.example.fly.componentbased.bean.HomeResponse;
 import rx.Observable;
 
 /**
- * 网络请求和数据库，持久层的操作
+ * 网络请求和数据库的操作
+ * ApiDataModel 这个类中主要创建 serviceApi 接口
  */
 public class HomeDataModel extends ApiDataModel {
 
@@ -37,5 +38,4 @@ public class HomeDataModel extends ApiDataModel {
                             }
                         }));
     }
-
 }

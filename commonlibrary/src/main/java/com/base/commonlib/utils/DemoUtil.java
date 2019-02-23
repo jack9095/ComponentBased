@@ -5,7 +5,7 @@ import android.support.annotation.NonNull;
 import java.lang.reflect.ParameterizedType;
 
 
-public class TUtil {
+public class DemoUtil {
     public static <T> T getNewInstance(Object object, int i) {
         if(object!=null){
             try {
@@ -19,12 +19,11 @@ public class TUtil {
             } catch (ClassCastException e) {
                 e.printStackTrace();
             }
-
         }
         return null;
-
     }
 
+    // 获取泛型类型
     public static <T> T getInstance(Object object, int i) {
         if (object != null) {
             return (T) ((ParameterizedType) object.getClass()
@@ -32,15 +31,9 @@ public class TUtil {
                     .getActualTypeArguments()[i];
         }
         return null;
-
     }
 
-    /**
-     * 检查引用是否为空
-     * @param reference
-     * @param <T>
-     * @return
-     */
+    // 检查引用是否为空
     public static @NonNull
     <T> T checkNotNull(final T reference) {
         if (reference == null) {

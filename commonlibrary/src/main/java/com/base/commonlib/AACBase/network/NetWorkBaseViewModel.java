@@ -5,7 +5,7 @@ import android.arch.lifecycle.AndroidViewModel;
 import android.arch.lifecycle.MutableLiveData;
 import android.support.annotation.NonNull;
 
-import com.base.commonlib.utils.TUtil;
+import com.base.commonlib.utils.DemoUtil;
 
 /**
  * jetPack新组件使用 ViewModel  LiveData
@@ -20,7 +20,7 @@ public class NetWorkBaseViewModel<T extends BaseDataModel> extends AndroidViewMo
     public NetWorkBaseViewModel(@NonNull Application application) {
         super(application);
         loadState = new MutableLiveData<>();
-        mDataModel = TUtil.getNewInstance(this, 0);
+        mDataModel = DemoUtil.getNewInstance(this, 0);
     }
 
     @Override

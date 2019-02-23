@@ -43,7 +43,8 @@ public abstract class BaseActivity extends AppCompatActivity {
      * 创建ViewModel对象
      *
      * @param clazz
-     * @return
+     * @return 对应的 T 的 ViewModel
+     * 泛型中的限定，必须是ViewModel的子类
      */
     public <T extends ViewModel> T get(Class<T> clazz) {
         return viewModelProvider.get(clazz);
@@ -52,7 +53,7 @@ public abstract class BaseActivity extends AppCompatActivity {
     /**
      * 初始化ViewModelProvider对象
      *
-     * @return
+     * @return ViewModelProvider
      */
     private ViewModelProvider getViewModelProvider() {
         return ViewModelProviders.of(this);

@@ -37,12 +37,20 @@ public class DemoActivity extends BaseActivity {
             public void onChanged(@Nullable User user) {
                 assert user != null;
                 Log.e("DemoActivity = ", "DemoActivity中接收user：" + user.toString());
+                Log.e("DemoActivity = ", "线程 = ：" + Thread.currentThread().getName());  // 打印结果主线程
             }
         });
     }
 
     public void onClick(View view){
-        getUser();
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                getUser();
+                Log.e("DemoActivity = ", "线程 *****  &&&&& = ：" + Thread.currentThread().getName());
+            }
+        }).start();
     }
 
     @Override
@@ -55,16 +63,16 @@ public class DemoActivity extends BaseActivity {
         return false;
     }
 
-    // 2.更改数据
+    // 更改数据
     public void getUser() {
         User user = new User();
         user.setName("lin");
         user.setPw("123456");
         user.setSex("male");
-        //同步更改setValue  ;  异步更改postValue
         DemoViewModel demoViewModel = get(DemoViewModel.class);
         MutableLiveData<User> userMutableLiveData = demoViewModel.getUserMutableLiveData();
-//        userMutableLiveData.setValue(user);
-        userMutableLiveData.postValue(user);  // 添加数据
+        //同步更改setValue  ;  异步更改postValue
+        userMutableLiveData.setValue(user);
+//        userMutableLiveData.postValue(user);  // 添加数据
     }
 }
