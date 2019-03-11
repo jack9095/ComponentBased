@@ -32,12 +32,16 @@ android {
         }
     }
 
+    dataBinding {
+        enabled = true
+    }
+
 }
 
 // 添加aar必备
 repositories {
     flatDir {
-        dirs 'libs','../commonlibrary/libs'
+        dirs 'libs', '../commonlibrary/libs'
     }
 }
 

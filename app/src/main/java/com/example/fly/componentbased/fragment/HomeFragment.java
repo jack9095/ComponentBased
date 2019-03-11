@@ -41,6 +41,7 @@ public class HomeFragment extends BaseLifecycleFragment<HomeViewModel> implement
         mViewModel.getHomeMutableLiveData().observe(this, new Observer<HomeResponse>() {
             @Override
             public void onChanged(@Nullable HomeResponse homeResponse) {
+                assert homeResponse != null;
                 showData(homeResponse);
             }
         });
