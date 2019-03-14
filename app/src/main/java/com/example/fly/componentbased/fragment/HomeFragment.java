@@ -51,7 +51,7 @@ public class HomeFragment extends BaseLifecycleFragment<HomeViewModel> implement
      * 列表展示数据
      */
     private void showData(HomeResponse homeResponse) {
-        Log.e("HomeFragment = ",homeResponse.toString());
+        Log.e("HomeFragment = ", homeResponse.toString());
     }
 
     @Override

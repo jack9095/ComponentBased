@@ -66,6 +66,7 @@ dependencies {
     provided rootProject.ext.dependencies["javax.annotation"]
     annotationProcessor rootProject.ext.dependencies["dagger2-apt-compiler"]
     api rootProject.ext.dependencies["lifecycle"]
+    api rootProject.ext.dependencies["lifecycle-runtime"]
     annotationProcessor rootProject.ext.dependencies["lifecycle-compiler"]
 
     api rootProject.ext.dependencies["eventbus"]

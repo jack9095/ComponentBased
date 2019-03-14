@@ -1,5 +1,6 @@
 package com.example.fly.componentbased;
 
+import android.arch.lifecycle.Lifecycle;
 import android.content.Context;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -13,6 +14,7 @@ import com.example.fly.componentbased.fragment.HomeFragment;
 import com.example.fly.componentbased.fragment.MineFragment;
 import com.example.fly.componentbased.fragment.VideoFragment;
 import com.example.fly.componentbased.fragment.WorkFragment;
+import com.example.fly.componentbased.lifecycle.MyObserver;
 
 /**
  * https://www.jianshu.com/u/ea71bb3770b4  // 路由分析的文章
@@ -35,6 +37,9 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        // TODO 必须在onCreate方法中调用addObserver方法
+        Lifecycle lifecycle = getLifecycle();
+        getLifecycle().addObserver(new MyObserver());
         initNavBar();
         initFragment(0);
     }
