@@ -6,7 +6,6 @@ if (!isNeedMessageModule.toBoolean()) {
 
 android {
     compileSdkVersion rootProject.ext.android["compileSdkVersion"]
-    buildToolsVersion rootProject.ext.android["buildToolsVersion"]
     defaultConfig {
         if (!isNeedMessageModule.toBoolean()) {
             applicationId "com.base.message"

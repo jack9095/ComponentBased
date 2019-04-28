@@ -6,7 +6,6 @@ if (!isNeedVideoModule.toBoolean()) {
 
 android {
     compileSdkVersion rootProject.ext.android["compileSdkVersion"]
-    buildToolsVersion rootProject.ext.android["buildToolsVersion"]
     defaultConfig {
         if (!isNeedVideoModule.toBoolean()) {
             applicationId "com.base.video"

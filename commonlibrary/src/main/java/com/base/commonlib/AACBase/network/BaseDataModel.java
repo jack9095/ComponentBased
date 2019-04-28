@@ -1,6 +1,5 @@
 package com.base.commonlib.AACBase.network;
 
-
 import rx.Subscription;
 import rx.subscriptions.CompositeSubscription;
 
@@ -13,10 +12,6 @@ public abstract class BaseDataModel {
     // 可以缓解Rx内存占用不能释放的问题
     private CompositeSubscription mCompositeSubscription;
 
-    public BaseDataModel() {
-
-    }
-
     // 添加订阅
     protected void addSubscribe(Subscription subscription) {
         if (mCompositeSubscription == null) {
@@ -26,7 +21,7 @@ public abstract class BaseDataModel {
     }
 
     // 移除订阅
-    public void unSubscribe() {
+    void unSubscribe() {
         if (mCompositeSubscription != null && mCompositeSubscription.hasSubscriptions()) {
             mCompositeSubscription.clear();
         }
