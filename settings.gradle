@@ -1,4 +1,4 @@
-include ':app'
+include ':app', ':banner'
 include ':commonlibrary'
 include ':home'
 include ':live'
