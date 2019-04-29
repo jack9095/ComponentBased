@@ -17,10 +17,10 @@ import android.view.animation.Interpolator;
 import android.widget.ImageView;
 import android.widget.Scroller;
 
-import com.dingxin.workspace.R;
-import com.dingxin.workspace.bean.BannerBean;
-import com.dingxin.workspace.utils.LogUtil;
-import com.dingxin.workspace.utils.glide.GlideUtil;
+import com.kuanquan.banner.R;
+import com.kuanquan.banner.bean.BannerBean;
+import com.kuanquan.banner.utils.LogUtil;
+import com.kuanquan.banner.utils.glide.GlideUtil;
 
 import java.lang.reflect.Field;
 import java.util.List;
