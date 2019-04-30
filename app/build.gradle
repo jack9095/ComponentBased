@@ -141,11 +141,11 @@ repositories {
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation 'com.android.support.constraint:constraint-layout:1.1.3'
-    androidTestCompile('com.android.support.test.espresso:espresso-core:3.0.2', {
+    androidTestImplementation('com.android.support.test.espresso:espresso-core:3.0.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-    provided rootProject.ext.dependencies["javax.annotation"]
-    testCompile rootProject.ext.dependencies["junit"]
+    compileOnly rootProject.ext.dependencies["javax.annotation"]
+    testImplementation rootProject.ext.dependencies["junit"]
     implementation rootProject.ext.dependencies["appcompat-v7"]
     implementation rootProject.ext.dependencies["constraint-layout"]
     implementation rootProject.ext.dependencies["arouter-api"]
@@ -155,7 +155,7 @@ dependencies {
     implementation rootProject.ext.dependencies["annotations"]
     annotationProcessor rootProject.ext.dependencies["arouter-compiler"]
     annotationProcessor rootProject.ext.dependencies["dagger2-apt-compiler"]
-    provided rootProject.ext.dependencies["javax.annotation"]
+    compileOnly rootProject.ext.dependencies["javax.annotation"]
     if (isNeedHomeModule.toBoolean()) {
         implementation project(':home')
     }
