@@ -1,7 +1,7 @@
 ext {
     //有重用的地方写在这里面，保证代码一致
     android = [compileSdkVersion       : 28,
-               buildToolsVersion       : "28.0.2",
+               buildToolsVersion       : "28.0.3",
                minSdkVersion           : 15,
                targetSdkVersion        : 28,
                versionCode             : 100000,

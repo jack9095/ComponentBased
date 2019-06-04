@@ -16,6 +16,8 @@ import com.example.fly.componentbased.fragment.VideoFragment;
 import com.example.fly.componentbased.fragment.WorkFragment;
 import com.example.fly.componentbased.lifecycle.MyObserver;
 
+import org.greenrobot.eventbus.EventBus;
+
 /**
  * https://www.jianshu.com/u/ea71bb3770b4  // 路由分析的文章
  *

@@ -9,7 +9,7 @@ android {
         versionCode rootProject.ext.android["versionCode"]
         versionName rootProject.ext.android["versionName"]
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-
+        multiDexEnabled true
         /*arouter*/
         javaCompileOptions {
             annotationProcessorOptions {
@@ -126,9 +126,9 @@ android {
     }
 
     // TODO 如果是在library中使用，那么使用使用该library的module也需要在build.gradle添加
-    dataBinding {
-        enabled = true
-    }
+//    dataBinding {
+//        enabled = true
+//    }
 }
 
 // 添加aar必备
@@ -155,7 +155,7 @@ dependencies {
     implementation rootProject.ext.dependencies["annotations"]
     annotationProcessor rootProject.ext.dependencies["arouter-compiler"]
     annotationProcessor rootProject.ext.dependencies["dagger2-apt-compiler"]
-    compileOnly rootProject.ext.dependencies["javax.annotation"]
+//    compileOnly rootProject.ext.dependencies["javax.annotation"]
     if (isNeedHomeModule.toBoolean()) {
         implementation project(':home')
     }
@@ -173,5 +173,10 @@ dependencies {
     //        exclude module: 'support-v4'//根据组件名排除
     //        exclude group: 'android.support.v4'//根据包名排除
     //    }
-    implementation project(':bottomnavigationbar')
+//    implementation project(':bottomnavigationbar')
+
+    // 解决方法数超过65555的解决办法
+    api ('com.android.support:multidex:1.0.3'){
+        exclude group: 'com.android.support'
+    }
 }

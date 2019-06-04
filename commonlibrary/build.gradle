@@ -14,7 +14,6 @@ android {
                 arguments = [AROUTER_MODULE_NAME: project.getName()]
             }
         }
-
     }
 
     buildTypes {
@@ -42,31 +41,31 @@ dependencies {
     })
     testImplementation rootProject.ext.dependencies["junit"]
 
-    api rootProject.ext.dependencies["appcompat-v7"]
+    implementation rootProject.ext.dependencies["appcompat-v7"]
     annotationProcessor rootProject.ext.dependencies["arouter-compiler"]
 
-    api rootProject.ext.dependencies["arouter-api"]
     api rootProject.ext.dependencies["gson"]
-    api rootProject.ext.dependencies["cardview-v7"]
-    api rootProject.ext.dependencies["butterknife"]
-    api rootProject.ext.dependencies["design"]
+    implementation rootProject.ext.dependencies["cardview-v7"]
+    implementation rootProject.ext.dependencies["butterknife"]
+    implementation rootProject.ext.dependencies["design"]
     api rootProject.ext.dependencies["rxjava"]
     api rootProject.ext.dependencies["rxandroid"]
     api rootProject.ext.dependencies["rxpermissions"]
     api rootProject.ext.dependencies["retrofit"]
     api rootProject.ext.dependencies["retrofit-converter-gson"]
     api rootProject.ext.dependencies["retrofit-adapter-rxjava"]
-    api rootProject.ext.dependencies["annotations"]
+    implementation rootProject.ext.dependencies["annotations"]
     api rootProject.ext.dependencies["dagger2"]
     api rootProject.ext.dependencies["okhttp3"]
     api rootProject.ext.dependencies["logging"]
     api rootProject.ext.dependencies["glide"]
-    api rootProject.ext.dependencies["recyclerview-v7"]
+    implementation rootProject.ext.dependencies["recyclerview-v7"]
     compileOnly rootProject.ext.dependencies["javax.annotation"]
     annotationProcessor rootProject.ext.dependencies["dagger2-apt-compiler"]
-    api rootProject.ext.dependencies["lifecycle"]
-    api rootProject.ext.dependencies["lifecycle-runtime"]
+    implementation rootProject.ext.dependencies["lifecycle"]
+    implementation rootProject.ext.dependencies["lifecycle-runtime"]
     annotationProcessor rootProject.ext.dependencies["lifecycle-compiler"]
+    implementation rootProject.ext.dependencies["arouter-api"]
 
     api rootProject.ext.dependencies["eventbus"]
     api(name: 'bottomnavigationbar-release', ext: 'aar')

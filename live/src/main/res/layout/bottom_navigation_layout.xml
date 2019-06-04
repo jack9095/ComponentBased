@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="48dp"
+    android:background="#f2f2f2"
+    tools:context="com.base.live.LiveMainActivity">
+
+    <Button
+        android:id="@+id/tab_btn_message"
+        style="@style/main_tab_button"
+        android:drawableTop="@drawable/tab_home"
+        android:text="消息" />
+
+    <Button
+        android:id="@+id/tab_btn_mail"
+        style="@style/main_tab_button"
+        android:drawableTop="@drawable/tab_exchange"
+        android:text="通讯录" />
+
+    <Button
+        android:id="@+id/tab_btn_work"
+        style="@style/main_tab_button"
+        android:drawableTop="@drawable/tab_exchange"
+        android:text="工作" />
+
+    <Button
+        android:id="@+id/tab_btn_mine"
+        style="@style/main_tab_button"
+        android:drawableTop="@drawable/tab_mine"
+        android:text="我的" />
+
+</LinearLayout>

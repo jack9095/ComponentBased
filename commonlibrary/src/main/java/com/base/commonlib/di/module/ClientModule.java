@@ -3,7 +3,7 @@ package com.base.commonlib.di.module;
 import android.app.Application;
 import android.text.TextUtils;
 
-import com.tbruyelle.rxpermissions.RxPermissions;
+//import com.tbruyelle.rxpermissions.RxPermissions;
 
 import java.io.File;
 import java.util.concurrent.TimeUnit;
@@ -15,6 +15,8 @@ import com.base.commonlib.http.RequestIntercept;
 import com.base.commonlib.rx.rxerrorhandler.ResponseErrorListener;
 import com.base.commonlib.rx.rxerrorhandler.RxErrorHandler;
 import com.base.commonlib.utils.SpUtil;
+import com.tbruyelle.rxpermissions2.RxPermissions;
+
 import dagger.Module;
 import dagger.Provides;
 import okhttp3.Cache;
@@ -124,11 +126,11 @@ public class ClientModule {
      * @param application
      * @return
      */
-    @Singleton
-    @Provides
-    RxPermissions provideRxPermissions(Application application) {
-        return RxPermissions.getInstance(application);
-    }
+//    @Singleton
+//    @Provides
+//    RxPermissions provideRxPermissions(Application application) {
+//        return RxPermissions.getInstance(application);
+//    }
     /**
      * @param builder
      * @param client

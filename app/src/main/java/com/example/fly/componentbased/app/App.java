@@ -1,6 +1,9 @@
 package com.example.fly.componentbased.app;
 
 
+import android.content.Context;
+import android.support.multidex.MultiDex;
+
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.base.commonlib.base.mvp_no_dagger.BaseApplication;
 import com.example.fly.componentbased.api.HttpHelper;
@@ -10,6 +13,12 @@ import com.example.fly.componentbased.api.URL;
 public class App extends BaseApplication {
 
     private boolean debug = true;
+
+    @Override
+    protected void attachBaseContext(Context base) {
+        super.attachBaseContext(base);
+        MultiDex.install(this);
+    }
 
     @Override
     public void onCreate() {
