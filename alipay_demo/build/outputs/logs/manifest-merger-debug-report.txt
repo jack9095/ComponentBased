@@ -1,9 +1,9 @@
 -- Merging decision tree log ---
 manifest
-ADDED from D:\ComponentBased\alipay_demo\src\main\AndroidManifest.xml:2:1-43:12
-INJECTED from D:\ComponentBased\alipay_demo\src\main\AndroidManifest.xml:2:1-43:12
-INJECTED from D:\ComponentBased\alipay_demo\src\main\AndroidManifest.xml:2:1-43:12
-INJECTED from D:\ComponentBased\alipay_demo\src\main\AndroidManifest.xml:2:1-43:12
+ADDED from D:\ComponentBased\alipay_demo\src\main\AndroidManifest.xml:2:1-45:12
+INJECTED from D:\ComponentBased\alipay_demo\src\main\AndroidManifest.xml:2:1-45:12
+INJECTED from D:\ComponentBased\alipay_demo\src\main\AndroidManifest.xml:2:1-45:12
+INJECTED from D:\ComponentBased\alipay_demo\src\main\AndroidManifest.xml:2:1-45:12
 MERGED from [:alipaySdk-15.6.4-20190611174341:] C:\Users\feiwang\.gradle\caches\transforms-2\files-2.1\558b82105fa2b2898a50e7da56ff5e5c\AndroidManifest.xml:2:1-59:12
 MERGED from [com.android.support:support-v4:28.0.0] C:\Users\feiwang\.gradle\caches\transforms-2\files-2.1\e89e2db77157c60e390eb8460537adac\AndroidManifest.xml:17:1-22:12
 MERGED from [com.android.support:appcompat-v7:28.0.0] C:\Users\feiwang\.gradle\caches\transforms-2\files-2.1\3898836bce51b90417696fd20d4505d6\AndroidManifest.xml:17:1-22:12
@@ -33,9 +33,9 @@ MERGED from [android.arch.lifecycle:viewmodel:1.1.1] C:\Users\feiwang\.gradle\ca
 MERGED from [android.arch.lifecycle:livedata:1.1.1] C:\Users\feiwang\.gradle\caches\transforms-2\files-2.1\c1525c29dd042dc6e6e677ccb3b86c47\AndroidManifest.xml:17:1-22:12
 MERGED from [android.arch.lifecycle:livedata-core:1.1.1] C:\Users\feiwang\.gradle\caches\transforms-2\files-2.1\4fa20559bd406853d668ac3c878f5810\AndroidManifest.xml:17:1-22:12
 MERGED from [android.arch.core:runtime:1.1.1] C:\Users\feiwang\.gradle\caches\transforms-2\files-2.1\f8119458bf8fb3b6b99bc4eacdc6de3b\AndroidManifest.xml:17:1-22:12
-INJECTED from D:\ComponentBased\alipay_demo\src\main\AndroidManifest.xml:2:1-43:12
-INJECTED from D:\ComponentBased\alipay_demo\src\main\AndroidManifest.xml:2:1-43:12
-INJECTED from D:\ComponentBased\alipay_demo\src\main\AndroidManifest.xml:2:1-43:12
+INJECTED from D:\ComponentBased\alipay_demo\src\main\AndroidManifest.xml:2:1-45:12
+INJECTED from D:\ComponentBased\alipay_demo\src\main\AndroidManifest.xml:2:1-45:12
+INJECTED from D:\ComponentBased\alipay_demo\src\main\AndroidManifest.xml:2:1-45:12
 	package
 		ADDED from D:\ComponentBased\alipay_demo\src\main\AndroidManifest.xml:4:5-38
 		INJECTED from D:\ComponentBased\alipay_demo\src\main\AndroidManifest.xml
@@ -85,7 +85,7 @@ MERGED from [:alipaySdk-15.6.4-20190611174341:] C:\Users\feiwang\.gradle\caches\
 	android:anyDensity
 		ADDED from D:\ComponentBased\alipay_demo\src\main\AndroidManifest.xml:14:9-34
 application
-ADDED from D:\ComponentBased\alipay_demo\src\main\AndroidManifest.xml:20:5-41:19
+ADDED from D:\ComponentBased\alipay_demo\src\main\AndroidManifest.xml:20:5-43:19
 MERGED from [:alipaySdk-15.6.4-20190611174341:] C:\Users\feiwang\.gradle\caches\transforms-2\files-2.1\558b82105fa2b2898a50e7da56ff5e5c\AndroidManifest.xml:24:5-57:19
 MERGED from [:alipaySdk-15.6.4-20190611174341:] C:\Users\feiwang\.gradle\caches\transforms-2\files-2.1\558b82105fa2b2898a50e7da56ff5e5c\AndroidManifest.xml:24:5-57:19
 MERGED from [com.android.support:support-compat:28.0.0] C:\Users\feiwang\.gradle\caches\transforms-2\files-2.1\f05b320c6c984e686d55705c88ef5a91\AndroidManifest.xml:22:5-94
@@ -96,6 +96,10 @@ MERGED from [com.android.support:versionedparcelable:28.0.0] C:\Users\feiwang\.g
 		ADDED from [com.android.support:support-compat:28.0.0] C:\Users\feiwang\.gradle\caches\transforms-2\files-2.1\f05b320c6c984e686d55705c88ef5a91\AndroidManifest.xml:22:18-91
 	android:label
 		ADDED from D:\ComponentBased\alipay_demo\src\main\AndroidManifest.xml:23:9-41
+	tools:ignore
+		ADDED from D:\ComponentBased\alipay_demo\src\main\AndroidManifest.xml:26:9-48
+	tools:targetApi
+		ADDED from D:\ComponentBased\alipay_demo\src\main\AndroidManifest.xml:25:9-28
 	android:allowBackup
 		ADDED from D:\ComponentBased\alipay_demo\src\main\AndroidManifest.xml:21:9-35
 	android:theme
@@ -103,33 +107,33 @@ MERGED from [com.android.support:versionedparcelable:28.0.0] C:\Users\feiwang\.g
 	android:networkSecurityConfig
 		ADDED from D:\ComponentBased\alipay_demo\src\main\AndroidManifest.xml:22:9-69
 activity#com.alipay.sdk.pay.demo.PayDemoActivity
-ADDED from D:\ComponentBased\alipay_demo\src\main\AndroidManifest.xml:25:9-34:20
+ADDED from D:\ComponentBased\alipay_demo\src\main\AndroidManifest.xml:27:9-36:20
 	android:label
-		ADDED from D:\ComponentBased\alipay_demo\src\main\AndroidManifest.xml:28:13-45
+		ADDED from D:\ComponentBased\alipay_demo\src\main\AndroidManifest.xml:30:13-45
 	android:icon
-		ADDED from D:\ComponentBased\alipay_demo\src\main\AndroidManifest.xml:27:13-46
+		ADDED from D:\ComponentBased\alipay_demo\src\main\AndroidManifest.xml:29:13-46
 	android:name
-		ADDED from D:\ComponentBased\alipay_demo\src\main\AndroidManifest.xml:26:13-67
+		ADDED from D:\ComponentBased\alipay_demo\src\main\AndroidManifest.xml:28:13-67
 intent-filter#action:name:android.intent.action.MAIN+category:name:android.intent.category.LAUNCHER
-ADDED from D:\ComponentBased\alipay_demo\src\main\AndroidManifest.xml:29:13-33:29
+ADDED from D:\ComponentBased\alipay_demo\src\main\AndroidManifest.xml:31:13-35:29
 action#android.intent.action.MAIN
-ADDED from D:\ComponentBased\alipay_demo\src\main\AndroidManifest.xml:30:17-69
+ADDED from D:\ComponentBased\alipay_demo\src\main\AndroidManifest.xml:32:17-69
 	android:name
-		ADDED from D:\ComponentBased\alipay_demo\src\main\AndroidManifest.xml:30:25-66
+		ADDED from D:\ComponentBased\alipay_demo\src\main\AndroidManifest.xml:32:25-66
 category#android.intent.category.LAUNCHER
-ADDED from D:\ComponentBased\alipay_demo\src\main\AndroidManifest.xml:32:17-77
+ADDED from D:\ComponentBased\alipay_demo\src\main\AndroidManifest.xml:34:17-77
 	android:name
-		ADDED from D:\ComponentBased\alipay_demo\src\main\AndroidManifest.xml:32:27-74
+		ADDED from D:\ComponentBased\alipay_demo\src\main\AndroidManifest.xml:34:27-74
 activity#com.alipay.sdk.pay.demo.H5PayDemoActivity
-ADDED from D:\ComponentBased\alipay_demo\src\main\AndroidManifest.xml:35:9-40:20
+ADDED from D:\ComponentBased\alipay_demo\src\main\AndroidManifest.xml:37:9-42:20
 	android:screenOrientation
-		ADDED from D:\ComponentBased\alipay_demo\src\main\AndroidManifest.xml:39:13-47
+		ADDED from D:\ComponentBased\alipay_demo\src\main\AndroidManifest.xml:41:13-47
 	android:exported
-		ADDED from D:\ComponentBased\alipay_demo\src\main\AndroidManifest.xml:38:13-37
+		ADDED from D:\ComponentBased\alipay_demo\src\main\AndroidManifest.xml:40:13-37
 	android:configChanges
-		ADDED from D:\ComponentBased\alipay_demo\src\main\AndroidManifest.xml:37:13-74
+		ADDED from D:\ComponentBased\alipay_demo\src\main\AndroidManifest.xml:39:13-74
 	android:name
-		ADDED from D:\ComponentBased\alipay_demo\src\main\AndroidManifest.xml:36:13-69
+		ADDED from D:\ComponentBased\alipay_demo\src\main\AndroidManifest.xml:38:13-69
 uses-sdk
 INJECTED from D:\ComponentBased\alipay_demo\src\main\AndroidManifest.xml reason: use-sdk injection requested
 INJECTED from D:\ComponentBased\alipay_demo\src\main\AndroidManifest.xml
@@ -265,4 +269,4 @@ ADDED from [:alipaySdk-15.6.4-20190611174341:] C:\Users\feiwang\.gradle\caches\t
 	android:name
 		ADDED from [:alipaySdk-15.6.4-20190611174341:] C:\Users\feiwang\.gradle\caches\transforms-2\files-2.1\558b82105fa2b2898a50e7da56ff5e5c\AndroidManifest.xml:52:13-67
 uses-permission#android.permission.READ_EXTERNAL_STORAGE
-IMPLIED from D:\ComponentBased\alipay_demo\src\main\AndroidManifest.xml:2:1-43:12 reason: com.alipay.sdk requested WRITE_EXTERNAL_STORAGE
+IMPLIED from D:\ComponentBased\alipay_demo\src\main\AndroidManifest.xml:2:1-45:12 reason: com.alipay.sdk requested WRITE_EXTERNAL_STORAGE
