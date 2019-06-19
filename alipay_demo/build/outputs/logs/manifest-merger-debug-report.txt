@@ -1,0 +1,268 @@
+-- Merging decision tree log ---
+manifest
+ADDED from D:\ComponentBased\alipay_demo\src\main\AndroidManifest.xml:2:1-43:12
+INJECTED from D:\ComponentBased\alipay_demo\src\main\AndroidManifest.xml:2:1-43:12
+INJECTED from D:\ComponentBased\alipay_demo\src\main\AndroidManifest.xml:2:1-43:12
+INJECTED from D:\ComponentBased\alipay_demo\src\main\AndroidManifest.xml:2:1-43:12
+MERGED from [:alipaySdk-15.6.4-20190611174341:] C:\Users\feiwang\.gradle\caches\transforms-2\files-2.1\558b82105fa2b2898a50e7da56ff5e5c\AndroidManifest.xml:2:1-59:12
+MERGED from [com.android.support:support-v4:28.0.0] C:\Users\feiwang\.gradle\caches\transforms-2\files-2.1\e89e2db77157c60e390eb8460537adac\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:appcompat-v7:28.0.0] C:\Users\feiwang\.gradle\caches\transforms-2\files-2.1\3898836bce51b90417696fd20d4505d6\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:support-media-compat:28.0.0] C:\Users\feiwang\.gradle\caches\transforms-2\files-2.1\5548b22f38c50cff19e45e15fdffb204\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:support-fragment:28.0.0] C:\Users\feiwang\.gradle\caches\transforms-2\files-2.1\136ab34408922579acc3518ed2909b95\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:animated-vector-drawable:28.0.0] C:\Users\feiwang\.gradle\caches\transforms-2\files-2.1\c931117bd0839c6cd63f4d29034e2d5f\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:support-core-ui:28.0.0] C:\Users\feiwang\.gradle\caches\transforms-2\files-2.1\3a20572223aca4672162c199a27d6e64\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:support-core-utils:28.0.0] C:\Users\feiwang\.gradle\caches\transforms-2\files-2.1\071cb42b9a1d1986cefeb068e3c370d2\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:support-vector-drawable:28.0.0] C:\Users\feiwang\.gradle\caches\transforms-2\files-2.1\1f82b0b049799a730c5d2655b043d154\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:loader:28.0.0] C:\Users\feiwang\.gradle\caches\transforms-2\files-2.1\7cdd99d11409bf0508ac4abd89bf66f1\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:viewpager:28.0.0] C:\Users\feiwang\.gradle\caches\transforms-2\files-2.1\16e9ef47bdb9cb922f6b896f50381a30\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:coordinatorlayout:28.0.0] C:\Users\feiwang\.gradle\caches\transforms-2\files-2.1\7909a5c8142d3b28811805890b71aa22\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:drawerlayout:28.0.0] C:\Users\feiwang\.gradle\caches\transforms-2\files-2.1\f719011cab17ef81bdc71dce8f00b4a5\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:slidingpanelayout:28.0.0] C:\Users\feiwang\.gradle\caches\transforms-2\files-2.1\b3c330e18619f9a872b1b6444509360c\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:customview:28.0.0] C:\Users\feiwang\.gradle\caches\transforms-2\files-2.1\be25920c6c79aee1587559bef073d119\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:swiperefreshlayout:28.0.0] C:\Users\feiwang\.gradle\caches\transforms-2\files-2.1\8f17ef036a6b836ae752834c7db8621f\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:asynclayoutinflater:28.0.0] C:\Users\feiwang\.gradle\caches\transforms-2\files-2.1\3c127d6ded8f3211e3a638d5e83ac1de\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:support-compat:28.0.0] C:\Users\feiwang\.gradle\caches\transforms-2\files-2.1\f05b320c6c984e686d55705c88ef5a91\AndroidManifest.xml:17:1-24:12
+MERGED from [com.android.support:versionedparcelable:28.0.0] C:\Users\feiwang\.gradle\caches\transforms-2\files-2.1\1d1c42c5263b47790de6d0ec8fdbe4bf\AndroidManifest.xml:17:1-25:12
+MERGED from [com.android.support:cursoradapter:28.0.0] C:\Users\feiwang\.gradle\caches\transforms-2\files-2.1\52bc85d5d77a764396377bff6251f7bb\AndroidManifest.xml:17:1-22:12
+MERGED from [android.arch.lifecycle:runtime:1.1.1] C:\Users\feiwang\.gradle\caches\transforms-2\files-2.1\156c40252c2e17117186ff3587e4d528\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:documentfile:28.0.0] C:\Users\feiwang\.gradle\caches\transforms-2\files-2.1\257eb3c2fe354618e164fde36b60b32f\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:localbroadcastmanager:28.0.0] C:\Users\feiwang\.gradle\caches\transforms-2\files-2.1\8b390589fbe03dcc91b3c1e492541cb8\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:print:28.0.0] C:\Users\feiwang\.gradle\caches\transforms-2\files-2.1\e5ade3fa9cb749f2c38d37ccbb990b5e\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:interpolator:28.0.0] C:\Users\feiwang\.gradle\caches\transforms-2\files-2.1\e0b796fdf701badaecaf5dea86b829da\AndroidManifest.xml:17:1-22:12
+MERGED from [android.arch.lifecycle:viewmodel:1.1.1] C:\Users\feiwang\.gradle\caches\transforms-2\files-2.1\fbe551f45bdab14bc16283318415c3a9\AndroidManifest.xml:17:1-22:12
+MERGED from [android.arch.lifecycle:livedata:1.1.1] C:\Users\feiwang\.gradle\caches\transforms-2\files-2.1\c1525c29dd042dc6e6e677ccb3b86c47\AndroidManifest.xml:17:1-22:12
+MERGED from [android.arch.lifecycle:livedata-core:1.1.1] C:\Users\feiwang\.gradle\caches\transforms-2\files-2.1\4fa20559bd406853d668ac3c878f5810\AndroidManifest.xml:17:1-22:12
+MERGED from [android.arch.core:runtime:1.1.1] C:\Users\feiwang\.gradle\caches\transforms-2\files-2.1\f8119458bf8fb3b6b99bc4eacdc6de3b\AndroidManifest.xml:17:1-22:12
+INJECTED from D:\ComponentBased\alipay_demo\src\main\AndroidManifest.xml:2:1-43:12
+INJECTED from D:\ComponentBased\alipay_demo\src\main\AndroidManifest.xml:2:1-43:12
+INJECTED from D:\ComponentBased\alipay_demo\src\main\AndroidManifest.xml:2:1-43:12
+	package
+		ADDED from D:\ComponentBased\alipay_demo\src\main\AndroidManifest.xml:4:5-38
+		INJECTED from D:\ComponentBased\alipay_demo\src\main\AndroidManifest.xml
+		INJECTED from D:\ComponentBased\alipay_demo\src\main\AndroidManifest.xml
+	android:versionName
+		ADDED from D:\ComponentBased\alipay_demo\src\main\AndroidManifest.xml:6:5-30
+		INJECTED from D:\ComponentBased\alipay_demo\src\main\AndroidManifest.xml
+		INJECTED from D:\ComponentBased\alipay_demo\src\main\AndroidManifest.xml
+	xmlns:tools
+		ADDED from D:\ComponentBased\alipay_demo\src\main\AndroidManifest.xml:3:5-51
+	xmlns:android
+		ADDED from D:\ComponentBased\alipay_demo\src\main\AndroidManifest.xml:2:11-69
+	android:versionCode
+		ADDED from D:\ComponentBased\alipay_demo\src\main\AndroidManifest.xml:5:5-28
+		INJECTED from D:\ComponentBased\alipay_demo\src\main\AndroidManifest.xml
+		INJECTED from D:\ComponentBased\alipay_demo\src\main\AndroidManifest.xml
+uses-permission#android.permission.INTERNET
+ADDED from D:\ComponentBased\alipay_demo\src\main\AndroidManifest.xml:8:5-67
+MERGED from [:alipaySdk-15.6.4-20190611174341:] C:\Users\feiwang\.gradle\caches\transforms-2\files-2.1\558b82105fa2b2898a50e7da56ff5e5c\AndroidManifest.xml:18:5-67
+MERGED from [:alipaySdk-15.6.4-20190611174341:] C:\Users\feiwang\.gradle\caches\transforms-2\files-2.1\558b82105fa2b2898a50e7da56ff5e5c\AndroidManifest.xml:18:5-67
+	android:name
+		ADDED from D:\ComponentBased\alipay_demo\src\main\AndroidManifest.xml:8:22-64
+uses-permission#android.permission.ACCESS_NETWORK_STATE
+ADDED from D:\ComponentBased\alipay_demo\src\main\AndroidManifest.xml:9:5-79
+MERGED from [:alipaySdk-15.6.4-20190611174341:] C:\Users\feiwang\.gradle\caches\transforms-2\files-2.1\558b82105fa2b2898a50e7da56ff5e5c\AndroidManifest.xml:19:5-79
+MERGED from [:alipaySdk-15.6.4-20190611174341:] C:\Users\feiwang\.gradle\caches\transforms-2\files-2.1\558b82105fa2b2898a50e7da56ff5e5c\AndroidManifest.xml:19:5-79
+	android:name
+		ADDED from D:\ComponentBased\alipay_demo\src\main\AndroidManifest.xml:9:22-76
+uses-permission#android.permission.ACCESS_WIFI_STATE
+ADDED from D:\ComponentBased\alipay_demo\src\main\AndroidManifest.xml:10:5-76
+MERGED from [:alipaySdk-15.6.4-20190611174341:] C:\Users\feiwang\.gradle\caches\transforms-2\files-2.1\558b82105fa2b2898a50e7da56ff5e5c\AndroidManifest.xml:20:5-76
+MERGED from [:alipaySdk-15.6.4-20190611174341:] C:\Users\feiwang\.gradle\caches\transforms-2\files-2.1\558b82105fa2b2898a50e7da56ff5e5c\AndroidManifest.xml:20:5-76
+	android:name
+		ADDED from D:\ComponentBased\alipay_demo\src\main\AndroidManifest.xml:10:22-73
+supports-screens
+ADDED from D:\ComponentBased\alipay_demo\src\main\AndroidManifest.xml:13:5-18:39
+MERGED from [:alipaySdk-15.6.4-20190611174341:] C:\Users\feiwang\.gradle\caches\transforms-2\files-2.1\558b82105fa2b2898a50e7da56ff5e5c\AndroidManifest.xml:11:5-16:39
+MERGED from [:alipaySdk-15.6.4-20190611174341:] C:\Users\feiwang\.gradle\caches\transforms-2\files-2.1\558b82105fa2b2898a50e7da56ff5e5c\AndroidManifest.xml:11:5-16:39
+	android:largeScreens
+		ADDED from D:\ComponentBased\alipay_demo\src\main\AndroidManifest.xml:15:9-36
+	android:smallScreens
+		ADDED from D:\ComponentBased\alipay_demo\src\main\AndroidManifest.xml:18:9-36
+	android:normalScreens
+		ADDED from D:\ComponentBased\alipay_demo\src\main\AndroidManifest.xml:16:9-37
+	android:resizeable
+		ADDED from D:\ComponentBased\alipay_demo\src\main\AndroidManifest.xml:17:9-34
+	android:anyDensity
+		ADDED from D:\ComponentBased\alipay_demo\src\main\AndroidManifest.xml:14:9-34
+application
+ADDED from D:\ComponentBased\alipay_demo\src\main\AndroidManifest.xml:20:5-41:19
+MERGED from [:alipaySdk-15.6.4-20190611174341:] C:\Users\feiwang\.gradle\caches\transforms-2\files-2.1\558b82105fa2b2898a50e7da56ff5e5c\AndroidManifest.xml:24:5-57:19
+MERGED from [:alipaySdk-15.6.4-20190611174341:] C:\Users\feiwang\.gradle\caches\transforms-2\files-2.1\558b82105fa2b2898a50e7da56ff5e5c\AndroidManifest.xml:24:5-57:19
+MERGED from [com.android.support:support-compat:28.0.0] C:\Users\feiwang\.gradle\caches\transforms-2\files-2.1\f05b320c6c984e686d55705c88ef5a91\AndroidManifest.xml:22:5-94
+MERGED from [com.android.support:support-compat:28.0.0] C:\Users\feiwang\.gradle\caches\transforms-2\files-2.1\f05b320c6c984e686d55705c88ef5a91\AndroidManifest.xml:22:5-94
+MERGED from [com.android.support:versionedparcelable:28.0.0] C:\Users\feiwang\.gradle\caches\transforms-2\files-2.1\1d1c42c5263b47790de6d0ec8fdbe4bf\AndroidManifest.xml:22:5-23:19
+MERGED from [com.android.support:versionedparcelable:28.0.0] C:\Users\feiwang\.gradle\caches\transforms-2\files-2.1\1d1c42c5263b47790de6d0ec8fdbe4bf\AndroidManifest.xml:22:5-23:19
+	android:appComponentFactory
+		ADDED from [com.android.support:support-compat:28.0.0] C:\Users\feiwang\.gradle\caches\transforms-2\files-2.1\f05b320c6c984e686d55705c88ef5a91\AndroidManifest.xml:22:18-91
+	android:label
+		ADDED from D:\ComponentBased\alipay_demo\src\main\AndroidManifest.xml:23:9-41
+	android:allowBackup
+		ADDED from D:\ComponentBased\alipay_demo\src\main\AndroidManifest.xml:21:9-35
+	android:theme
+		ADDED from D:\ComponentBased\alipay_demo\src\main\AndroidManifest.xml:24:9-40
+	android:networkSecurityConfig
+		ADDED from D:\ComponentBased\alipay_demo\src\main\AndroidManifest.xml:22:9-69
+activity#com.alipay.sdk.pay.demo.PayDemoActivity
+ADDED from D:\ComponentBased\alipay_demo\src\main\AndroidManifest.xml:25:9-34:20
+	android:label
+		ADDED from D:\ComponentBased\alipay_demo\src\main\AndroidManifest.xml:28:13-45
+	android:icon
+		ADDED from D:\ComponentBased\alipay_demo\src\main\AndroidManifest.xml:27:13-46
+	android:name
+		ADDED from D:\ComponentBased\alipay_demo\src\main\AndroidManifest.xml:26:13-67
+intent-filter#action:name:android.intent.action.MAIN+category:name:android.intent.category.LAUNCHER
+ADDED from D:\ComponentBased\alipay_demo\src\main\AndroidManifest.xml:29:13-33:29
+action#android.intent.action.MAIN
+ADDED from D:\ComponentBased\alipay_demo\src\main\AndroidManifest.xml:30:17-69
+	android:name
+		ADDED from D:\ComponentBased\alipay_demo\src\main\AndroidManifest.xml:30:25-66
+category#android.intent.category.LAUNCHER
+ADDED from D:\ComponentBased\alipay_demo\src\main\AndroidManifest.xml:32:17-77
+	android:name
+		ADDED from D:\ComponentBased\alipay_demo\src\main\AndroidManifest.xml:32:27-74
+activity#com.alipay.sdk.pay.demo.H5PayDemoActivity
+ADDED from D:\ComponentBased\alipay_demo\src\main\AndroidManifest.xml:35:9-40:20
+	android:screenOrientation
+		ADDED from D:\ComponentBased\alipay_demo\src\main\AndroidManifest.xml:39:13-47
+	android:exported
+		ADDED from D:\ComponentBased\alipay_demo\src\main\AndroidManifest.xml:38:13-37
+	android:configChanges
+		ADDED from D:\ComponentBased\alipay_demo\src\main\AndroidManifest.xml:37:13-74
+	android:name
+		ADDED from D:\ComponentBased\alipay_demo\src\main\AndroidManifest.xml:36:13-69
+uses-sdk
+INJECTED from D:\ComponentBased\alipay_demo\src\main\AndroidManifest.xml reason: use-sdk injection requested
+INJECTED from D:\ComponentBased\alipay_demo\src\main\AndroidManifest.xml
+INJECTED from D:\ComponentBased\alipay_demo\src\main\AndroidManifest.xml
+MERGED from [:alipaySdk-15.6.4-20190611174341:] C:\Users\feiwang\.gradle\caches\transforms-2\files-2.1\558b82105fa2b2898a50e7da56ff5e5c\AndroidManifest.xml:7:5-9:41
+MERGED from [:alipaySdk-15.6.4-20190611174341:] C:\Users\feiwang\.gradle\caches\transforms-2\files-2.1\558b82105fa2b2898a50e7da56ff5e5c\AndroidManifest.xml:7:5-9:41
+MERGED from [com.android.support:support-v4:28.0.0] C:\Users\feiwang\.gradle\caches\transforms-2\files-2.1\e89e2db77157c60e390eb8460537adac\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-v4:28.0.0] C:\Users\feiwang\.gradle\caches\transforms-2\files-2.1\e89e2db77157c60e390eb8460537adac\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:appcompat-v7:28.0.0] C:\Users\feiwang\.gradle\caches\transforms-2\files-2.1\3898836bce51b90417696fd20d4505d6\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:appcompat-v7:28.0.0] C:\Users\feiwang\.gradle\caches\transforms-2\files-2.1\3898836bce51b90417696fd20d4505d6\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-media-compat:28.0.0] C:\Users\feiwang\.gradle\caches\transforms-2\files-2.1\5548b22f38c50cff19e45e15fdffb204\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-media-compat:28.0.0] C:\Users\feiwang\.gradle\caches\transforms-2\files-2.1\5548b22f38c50cff19e45e15fdffb204\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-fragment:28.0.0] C:\Users\feiwang\.gradle\caches\transforms-2\files-2.1\136ab34408922579acc3518ed2909b95\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-fragment:28.0.0] C:\Users\feiwang\.gradle\caches\transforms-2\files-2.1\136ab34408922579acc3518ed2909b95\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:animated-vector-drawable:28.0.0] C:\Users\feiwang\.gradle\caches\transforms-2\files-2.1\c931117bd0839c6cd63f4d29034e2d5f\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:animated-vector-drawable:28.0.0] C:\Users\feiwang\.gradle\caches\transforms-2\files-2.1\c931117bd0839c6cd63f4d29034e2d5f\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-core-ui:28.0.0] C:\Users\feiwang\.gradle\caches\transforms-2\files-2.1\3a20572223aca4672162c199a27d6e64\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-core-ui:28.0.0] C:\Users\feiwang\.gradle\caches\transforms-2\files-2.1\3a20572223aca4672162c199a27d6e64\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-core-utils:28.0.0] C:\Users\feiwang\.gradle\caches\transforms-2\files-2.1\071cb42b9a1d1986cefeb068e3c370d2\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-core-utils:28.0.0] C:\Users\feiwang\.gradle\caches\transforms-2\files-2.1\071cb42b9a1d1986cefeb068e3c370d2\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-vector-drawable:28.0.0] C:\Users\feiwang\.gradle\caches\transforms-2\files-2.1\1f82b0b049799a730c5d2655b043d154\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-vector-drawable:28.0.0] C:\Users\feiwang\.gradle\caches\transforms-2\files-2.1\1f82b0b049799a730c5d2655b043d154\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:loader:28.0.0] C:\Users\feiwang\.gradle\caches\transforms-2\files-2.1\7cdd99d11409bf0508ac4abd89bf66f1\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:loader:28.0.0] C:\Users\feiwang\.gradle\caches\transforms-2\files-2.1\7cdd99d11409bf0508ac4abd89bf66f1\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:viewpager:28.0.0] C:\Users\feiwang\.gradle\caches\transforms-2\files-2.1\16e9ef47bdb9cb922f6b896f50381a30\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:viewpager:28.0.0] C:\Users\feiwang\.gradle\caches\transforms-2\files-2.1\16e9ef47bdb9cb922f6b896f50381a30\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:coordinatorlayout:28.0.0] C:\Users\feiwang\.gradle\caches\transforms-2\files-2.1\7909a5c8142d3b28811805890b71aa22\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:coordinatorlayout:28.0.0] C:\Users\feiwang\.gradle\caches\transforms-2\files-2.1\7909a5c8142d3b28811805890b71aa22\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:drawerlayout:28.0.0] C:\Users\feiwang\.gradle\caches\transforms-2\files-2.1\f719011cab17ef81bdc71dce8f00b4a5\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:drawerlayout:28.0.0] C:\Users\feiwang\.gradle\caches\transforms-2\files-2.1\f719011cab17ef81bdc71dce8f00b4a5\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:slidingpanelayout:28.0.0] C:\Users\feiwang\.gradle\caches\transforms-2\files-2.1\b3c330e18619f9a872b1b6444509360c\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:slidingpanelayout:28.0.0] C:\Users\feiwang\.gradle\caches\transforms-2\files-2.1\b3c330e18619f9a872b1b6444509360c\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:customview:28.0.0] C:\Users\feiwang\.gradle\caches\transforms-2\files-2.1\be25920c6c79aee1587559bef073d119\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:customview:28.0.0] C:\Users\feiwang\.gradle\caches\transforms-2\files-2.1\be25920c6c79aee1587559bef073d119\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:swiperefreshlayout:28.0.0] C:\Users\feiwang\.gradle\caches\transforms-2\files-2.1\8f17ef036a6b836ae752834c7db8621f\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:swiperefreshlayout:28.0.0] C:\Users\feiwang\.gradle\caches\transforms-2\files-2.1\8f17ef036a6b836ae752834c7db8621f\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:asynclayoutinflater:28.0.0] C:\Users\feiwang\.gradle\caches\transforms-2\files-2.1\3c127d6ded8f3211e3a638d5e83ac1de\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:asynclayoutinflater:28.0.0] C:\Users\feiwang\.gradle\caches\transforms-2\files-2.1\3c127d6ded8f3211e3a638d5e83ac1de\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-compat:28.0.0] C:\Users\feiwang\.gradle\caches\transforms-2\files-2.1\f05b320c6c984e686d55705c88ef5a91\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-compat:28.0.0] C:\Users\feiwang\.gradle\caches\transforms-2\files-2.1\f05b320c6c984e686d55705c88ef5a91\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:versionedparcelable:28.0.0] C:\Users\feiwang\.gradle\caches\transforms-2\files-2.1\1d1c42c5263b47790de6d0ec8fdbe4bf\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:versionedparcelable:28.0.0] C:\Users\feiwang\.gradle\caches\transforms-2\files-2.1\1d1c42c5263b47790de6d0ec8fdbe4bf\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:cursoradapter:28.0.0] C:\Users\feiwang\.gradle\caches\transforms-2\files-2.1\52bc85d5d77a764396377bff6251f7bb\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:cursoradapter:28.0.0] C:\Users\feiwang\.gradle\caches\transforms-2\files-2.1\52bc85d5d77a764396377bff6251f7bb\AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:runtime:1.1.1] C:\Users\feiwang\.gradle\caches\transforms-2\files-2.1\156c40252c2e17117186ff3587e4d528\AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:runtime:1.1.1] C:\Users\feiwang\.gradle\caches\transforms-2\files-2.1\156c40252c2e17117186ff3587e4d528\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:documentfile:28.0.0] C:\Users\feiwang\.gradle\caches\transforms-2\files-2.1\257eb3c2fe354618e164fde36b60b32f\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:documentfile:28.0.0] C:\Users\feiwang\.gradle\caches\transforms-2\files-2.1\257eb3c2fe354618e164fde36b60b32f\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:localbroadcastmanager:28.0.0] C:\Users\feiwang\.gradle\caches\transforms-2\files-2.1\8b390589fbe03dcc91b3c1e492541cb8\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:localbroadcastmanager:28.0.0] C:\Users\feiwang\.gradle\caches\transforms-2\files-2.1\8b390589fbe03dcc91b3c1e492541cb8\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:print:28.0.0] C:\Users\feiwang\.gradle\caches\transforms-2\files-2.1\e5ade3fa9cb749f2c38d37ccbb990b5e\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:print:28.0.0] C:\Users\feiwang\.gradle\caches\transforms-2\files-2.1\e5ade3fa9cb749f2c38d37ccbb990b5e\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:interpolator:28.0.0] C:\Users\feiwang\.gradle\caches\transforms-2\files-2.1\e0b796fdf701badaecaf5dea86b829da\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:interpolator:28.0.0] C:\Users\feiwang\.gradle\caches\transforms-2\files-2.1\e0b796fdf701badaecaf5dea86b829da\AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:viewmodel:1.1.1] C:\Users\feiwang\.gradle\caches\transforms-2\files-2.1\fbe551f45bdab14bc16283318415c3a9\AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:viewmodel:1.1.1] C:\Users\feiwang\.gradle\caches\transforms-2\files-2.1\fbe551f45bdab14bc16283318415c3a9\AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:livedata:1.1.1] C:\Users\feiwang\.gradle\caches\transforms-2\files-2.1\c1525c29dd042dc6e6e677ccb3b86c47\AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:livedata:1.1.1] C:\Users\feiwang\.gradle\caches\transforms-2\files-2.1\c1525c29dd042dc6e6e677ccb3b86c47\AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:livedata-core:1.1.1] C:\Users\feiwang\.gradle\caches\transforms-2\files-2.1\4fa20559bd406853d668ac3c878f5810\AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:livedata-core:1.1.1] C:\Users\feiwang\.gradle\caches\transforms-2\files-2.1\4fa20559bd406853d668ac3c878f5810\AndroidManifest.xml:20:5-44
+MERGED from [android.arch.core:runtime:1.1.1] C:\Users\feiwang\.gradle\caches\transforms-2\files-2.1\f8119458bf8fb3b6b99bc4eacdc6de3b\AndroidManifest.xml:20:5-44
+MERGED from [android.arch.core:runtime:1.1.1] C:\Users\feiwang\.gradle\caches\transforms-2\files-2.1\f8119458bf8fb3b6b99bc4eacdc6de3b\AndroidManifest.xml:20:5-44
+INJECTED from D:\ComponentBased\alipay_demo\src\main\AndroidManifest.xml
+INJECTED from D:\ComponentBased\alipay_demo\src\main\AndroidManifest.xml
+	android:targetSdkVersion
+		INJECTED from D:\ComponentBased\alipay_demo\src\main\AndroidManifest.xml
+		ADDED from D:\ComponentBased\alipay_demo\src\main\AndroidManifest.xml
+		INJECTED from D:\ComponentBased\alipay_demo\src\main\AndroidManifest.xml
+	android:minSdkVersion
+		INJECTED from D:\ComponentBased\alipay_demo\src\main\AndroidManifest.xml
+		ADDED from D:\ComponentBased\alipay_demo\src\main\AndroidManifest.xml
+		INJECTED from D:\ComponentBased\alipay_demo\src\main\AndroidManifest.xml
+uses-permission#android.permission.READ_PHONE_STATE
+ADDED from [:alipaySdk-15.6.4-20190611174341:] C:\Users\feiwang\.gradle\caches\transforms-2\files-2.1\558b82105fa2b2898a50e7da56ff5e5c\AndroidManifest.xml:21:5-75
+	android:name
+		ADDED from [:alipaySdk-15.6.4-20190611174341:] C:\Users\feiwang\.gradle\caches\transforms-2\files-2.1\558b82105fa2b2898a50e7da56ff5e5c\AndroidManifest.xml:21:22-72
+uses-permission#android.permission.WRITE_EXTERNAL_STORAGE
+ADDED from [:alipaySdk-15.6.4-20190611174341:] C:\Users\feiwang\.gradle\caches\transforms-2\files-2.1\558b82105fa2b2898a50e7da56ff5e5c\AndroidManifest.xml:22:5-81
+	android:name
+		ADDED from [:alipaySdk-15.6.4-20190611174341:] C:\Users\feiwang\.gradle\caches\transforms-2\files-2.1\558b82105fa2b2898a50e7da56ff5e5c\AndroidManifest.xml:22:22-78
+uses-library#org.apache.http.legacy
+ADDED from [:alipaySdk-15.6.4-20190611174341:] C:\Users\feiwang\.gradle\caches\transforms-2\files-2.1\558b82105fa2b2898a50e7da56ff5e5c\AndroidManifest.xml:25:9-27:40
+	android:required
+		ADDED from [:alipaySdk-15.6.4-20190611174341:] C:\Users\feiwang\.gradle\caches\transforms-2\files-2.1\558b82105fa2b2898a50e7da56ff5e5c\AndroidManifest.xml:27:13-37
+	android:name
+		ADDED from [:alipaySdk-15.6.4-20190611174341:] C:\Users\feiwang\.gradle\caches\transforms-2\files-2.1\558b82105fa2b2898a50e7da56ff5e5c\AndroidManifest.xml:26:13-50
+activity#com.alipay.sdk.app.H5PayActivity
+ADDED from [:alipaySdk-15.6.4-20190611174341:] C:\Users\feiwang\.gradle\caches\transforms-2\files-2.1\558b82105fa2b2898a50e7da56ff5e5c\AndroidManifest.xml:29:9-34:20
+	android:screenOrientation
+		ADDED from [:alipaySdk-15.6.4-20190611174341:] C:\Users\feiwang\.gradle\caches\transforms-2\files-2.1\558b82105fa2b2898a50e7da56ff5e5c\AndroidManifest.xml:33:13-47
+	android:exported
+		ADDED from [:alipaySdk-15.6.4-20190611174341:] C:\Users\feiwang\.gradle\caches\transforms-2\files-2.1\558b82105fa2b2898a50e7da56ff5e5c\AndroidManifest.xml:32:13-37
+	android:configChanges
+		ADDED from [:alipaySdk-15.6.4-20190611174341:] C:\Users\feiwang\.gradle\caches\transforms-2\files-2.1\558b82105fa2b2898a50e7da56ff5e5c\AndroidManifest.xml:31:13-74
+	android:name
+		ADDED from [:alipaySdk-15.6.4-20190611174341:] C:\Users\feiwang\.gradle\caches\transforms-2\files-2.1\558b82105fa2b2898a50e7da56ff5e5c\AndroidManifest.xml:30:13-60
+activity#com.alipay.sdk.app.H5AuthActivity
+ADDED from [:alipaySdk-15.6.4-20190611174341:] C:\Users\feiwang\.gradle\caches\transforms-2\files-2.1\558b82105fa2b2898a50e7da56ff5e5c\AndroidManifest.xml:35:9-40:20
+	android:screenOrientation
+		ADDED from [:alipaySdk-15.6.4-20190611174341:] C:\Users\feiwang\.gradle\caches\transforms-2\files-2.1\558b82105fa2b2898a50e7da56ff5e5c\AndroidManifest.xml:39:13-47
+	android:exported
+		ADDED from [:alipaySdk-15.6.4-20190611174341:] C:\Users\feiwang\.gradle\caches\transforms-2\files-2.1\558b82105fa2b2898a50e7da56ff5e5c\AndroidManifest.xml:38:13-37
+	android:configChanges
+		ADDED from [:alipaySdk-15.6.4-20190611174341:] C:\Users\feiwang\.gradle\caches\transforms-2\files-2.1\558b82105fa2b2898a50e7da56ff5e5c\AndroidManifest.xml:37:13-74
+	android:name
+		ADDED from [:alipaySdk-15.6.4-20190611174341:] C:\Users\feiwang\.gradle\caches\transforms-2\files-2.1\558b82105fa2b2898a50e7da56ff5e5c\AndroidManifest.xml:36:13-61
+activity#com.alipay.sdk.app.PayResultActivity
+ADDED from [:alipaySdk-15.6.4-20190611174341:] C:\Users\feiwang\.gradle\caches\transforms-2\files-2.1\558b82105fa2b2898a50e7da56ff5e5c\AndroidManifest.xml:41:9-50:20
+	android:launchMode
+		ADDED from [:alipaySdk-15.6.4-20190611174341:] C:\Users\feiwang\.gradle\caches\transforms-2\files-2.1\558b82105fa2b2898a50e7da56ff5e5c\AndroidManifest.xml:45:13-48
+	android:exported
+		ADDED from [:alipaySdk-15.6.4-20190611174341:] C:\Users\feiwang\.gradle\caches\transforms-2\files-2.1\558b82105fa2b2898a50e7da56ff5e5c\AndroidManifest.xml:44:13-36
+	android:configChanges
+		ADDED from [:alipaySdk-15.6.4-20190611174341:] C:\Users\feiwang\.gradle\caches\transforms-2\files-2.1\558b82105fa2b2898a50e7da56ff5e5c\AndroidManifest.xml:43:13-74
+	android:theme
+		ADDED from [:alipaySdk-15.6.4-20190611174341:] C:\Users\feiwang\.gradle\caches\transforms-2\files-2.1\558b82105fa2b2898a50e7da56ff5e5c\AndroidManifest.xml:46:13-72
+	android:name
+		ADDED from [:alipaySdk-15.6.4-20190611174341:] C:\Users\feiwang\.gradle\caches\transforms-2\files-2.1\558b82105fa2b2898a50e7da56ff5e5c\AndroidManifest.xml:42:13-64
+intent-filter#category:name:android.intent.category.DEFAULT
+ADDED from [:alipaySdk-15.6.4-20190611174341:] C:\Users\feiwang\.gradle\caches\transforms-2\files-2.1\558b82105fa2b2898a50e7da56ff5e5c\AndroidManifest.xml:47:13-49:29
+category#android.intent.category.DEFAULT
+ADDED from [:alipaySdk-15.6.4-20190611174341:] C:\Users\feiwang\.gradle\caches\transforms-2\files-2.1\558b82105fa2b2898a50e7da56ff5e5c\AndroidManifest.xml:48:17-76
+	android:name
+		ADDED from [:alipaySdk-15.6.4-20190611174341:] C:\Users\feiwang\.gradle\caches\transforms-2\files-2.1\558b82105fa2b2898a50e7da56ff5e5c\AndroidManifest.xml:48:27-73
+activity#com.alipay.sdk.app.AlipayResultActivity
+ADDED from [:alipaySdk-15.6.4-20190611174341:] C:\Users\feiwang\.gradle\caches\transforms-2\files-2.1\558b82105fa2b2898a50e7da56ff5e5c\AndroidManifest.xml:51:9-56:20
+	android:launchMode
+		ADDED from [:alipaySdk-15.6.4-20190611174341:] C:\Users\feiwang\.gradle\caches\transforms-2\files-2.1\558b82105fa2b2898a50e7da56ff5e5c\AndroidManifest.xml:54:13-44
+	android:exported
+		ADDED from [:alipaySdk-15.6.4-20190611174341:] C:\Users\feiwang\.gradle\caches\transforms-2\files-2.1\558b82105fa2b2898a50e7da56ff5e5c\AndroidManifest.xml:53:13-36
+	android:theme
+		ADDED from [:alipaySdk-15.6.4-20190611174341:] C:\Users\feiwang\.gradle\caches\transforms-2\files-2.1\558b82105fa2b2898a50e7da56ff5e5c\AndroidManifest.xml:55:13-72
+	android:name
+		ADDED from [:alipaySdk-15.6.4-20190611174341:] C:\Users\feiwang\.gradle\caches\transforms-2\files-2.1\558b82105fa2b2898a50e7da56ff5e5c\AndroidManifest.xml:52:13-67
+uses-permission#android.permission.READ_EXTERNAL_STORAGE
+IMPLIED from D:\ComponentBased\alipay_demo\src\main\AndroidManifest.xml:2:1-43:12 reason: com.alipay.sdk requested WRITE_EXTERNAL_STORAGE

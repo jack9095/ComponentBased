@@ -1,4 +1,4 @@
-include ':app'
+include ':app', ':alipay_demo'
 //include ':banner', ':baselibrary'
 include ':commonlibrary'
 include ':home'

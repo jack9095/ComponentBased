@@ -12,9 +12,9 @@ import java.util.concurrent.ExecutorService;
 import java.util.logging.Level;
 
 /**
- * EventBus是Android的中央发布/订阅事件系统。事件被发布（@link post（object））到总线，总线将事件传递给具有匹配事件类型处理程序方法的订户。
- * 要接收事件，订户必须使用@link register（object）注册到总线。注册后，订阅服务器将接收事件，直到调用@link unregister（object）。
- * 事件处理方法必须由@link subscribe注释，必须是公共的，不返回任何内容（void），并且只有一个参数（事件）。
+ * EventBus 是 Android 的中央发布/订阅事件系统。事件被发布（@link post（object））到总线，总线将事件传递给具有匹配事件类型处理程序方法的订户。
+ * 要接收事件，订户必须使用 @link register（object）注册到总线。注册后，订阅服务器将接收事件，直到调用@link unregister（object）。
+ * 事件处理方法必须由 @link subscribe 注释，必须是公共的，不返回任何内容（void），并且只有一个参数（事件）。
  *
  * @author Markus Junginger, greenrobot
  *

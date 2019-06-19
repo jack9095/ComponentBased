@@ -14,7 +14,7 @@ import com.base.commonlib.eventbus.EventCenter;
 import org.greenrobot.eventbus.EventBus;
 
 /**
- * BaseActivity基础类，处理ViewModelProvider的初始化
+ * BaseActivity 基础类，处理 ViewModelProvider 的初始化
  */
 public abstract class BaseActivity extends AppCompatActivity {
     private ViewModelProvider viewModelProvider;
